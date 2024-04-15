@@ -104,7 +104,7 @@
     <script>
       let makeEnemies;
       let gameTimer = 0;
-      let enemySpeed = 3; // 적의 이동 속도
+      let enemySpeed = 4; // 적의 이동 속도
       let player = document.getElementById("me");
       let btn = document.getElementById("start"); // 시작 버튼
 
@@ -257,7 +257,7 @@
       ///===================== ENEMY ==================//////
       // 적 생성 함수
       function createEnemy() {
-        for (let i = 0; i < 180; i++) {
+        for (let i = 0; i < 130; i++) {
           let enemy = document.createElement("div");
           enemy.classList.add("enemy");
           enemy.style.position = "absolute";
