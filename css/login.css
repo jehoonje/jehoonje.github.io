@@ -1,0 +1,123 @@
+@import url(../common.css);
+body {
+  background: #1a73e8;
+}
+div.wrap {
+  width: 1200px;
+  height: 100vh;
+  margin: 0 auto; 
+  background-color: #1A73E8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.wrap .container {
+  width: 50%;
+  height: 70%;
+  border: 1px solid #dedede;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 30px;
+  
+}
+
+div.wrap .container .header {
+  width: 100%;
+  height: 27%;
+  color: #1A73E8;
+  /* border: 2px solid blue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+  font-family: "Racing Sans One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2.5em;
+}
+
+div.wrap .container .sub-container {
+  width: 100%;
+  height: 60%;
+  /* border: 2px solid blue; */
+}
+
+div.wrap .container .sub-container .user-name {
+  display: flex;
+  width: 80%;
+  background: #ffffff;
+  border-radius: 10px;
+  margin-left: 10%;
+  height: 18%;
+  font-size: 20px;
+  border: 1px solid #1A73E8;
+  text-indent: 4%;
+}
+div.wrap .container .sub-container .user-name::placeholder {
+  padding-left: 2%;
+  color: #d7d7d7;
+}
+div.wrap .container .sub-container .password {
+  display: flex;
+  background: #ffffff;
+  border-radius: 10px;
+  width: 80%;
+  margin-top: 5%;
+  margin-left: 10%;
+  font-size: 20px;
+  height: 18%;
+  border: 1px solid #1A73E8;
+  text-indent: 4%;
+}
+div.wrap .container .sub-container .password::placeholder {
+  padding-left: 2%;
+  color: #d7d7d7;
+}
+div.wrap .container .sub-container div {
+  display: flex;
+  width: 100%;
+  height: 60%;
+  flex-direction: column;
+  /* border: 2px solid #000; */
+}
+
+div.wrap .container .sub-container div .login-btn {
+  /* border: 2px solid #000; */
+  width: 80%;
+  height: 60%;
+  margin-left: 10%;
+  margin-top: 14%;
+  border-radius: 10px;
+  font-family: "Noto Sans", sans-serif;
+  /* font-weight: bold; */
+  font-size: 1.5em;
+  color: #e0e0e0;
+  background: #1A73E8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div.wrap .container .sub-container div .login-btn:hover {
+  background: #ba2a2a;
+  color: #fefefe;
+}
+
+div.wrap .container .sub-container div .account {
+  /* border: 2px solid #000; */
+  width: 80%;
+  height: 35%;
+  color: #b3b3b3;
+  font-family: "Noto Sans KR", sans-serif;
+  margin-top: 5%;
+  margin-left: 10%;
+  text-decoration: underline;
+  text-underline-offset: 0.5em; 
+  border-radius: 10px;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;  
+  justify-content: center;
+  /* background: rgb(26, 68, 173); */
+}

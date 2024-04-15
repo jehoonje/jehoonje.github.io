@@ -1,0 +1,175 @@
+@import url('../common.css');
+* {
+    font-family: "Noto Sans KR", sans-serif;
+}
+/* header */
+
+
+header {
+  position: relative;
+    height: 70px;
+    background: #1a73e8;
+    /* border-bottom: 1px solid #e6e6e6; */
+  }
+  
+  .inner {
+    width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 7px;
+  }
+  
+  /* gnb */
+  
+  .gnb {
+    display: flex;
+  }
+  
+  .gnb i {
+    color: #8cb9f3;
+    font-size: 22px;
+  }
+  
+  .gnb li {
+    margin-right: 80px;
+  }
+  
+  .gnb li:hover a i {
+    color: #fff;
+  }
+  /* add icon */
+
+.add-icon {
+    display: flex;
+    align-items: center;
+  }
+  
+  .add-icon p {
+    color: #fff;
+    margin-right: 15px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .fas.fa-plus {
+    color: #1a73e8;
+    font-size: 16px;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    background: #fff;
+    border-radius: 40px;
+  }
+  header #user-name {
+    position: absolute;
+    right: 30%;
+    top: 50%;
+    transform: translate(0,-50%);
+    align-content: center;
+    font-size: 14px;
+    height: 30px;
+    color: #fff;
+  }
+/* wrap style */
+.wrap {
+    width: 1200px;
+    height: 85vh;
+    margin: 0 auto;
+    position: relative;
+    /* background: #eef; */
+}
+
+/* #page-name style*/
+#page-name {
+    margin-top: 40px;
+    font-size: 60px;
+    font-weight: 700;
+    color: #bdf;
+    font-family: "Racing Sans One", sans-serif;
+}
+
+/* section.records style*/
+section.records {
+    /* background: dodgerblue; */
+    height: 500px;
+    margin-top: 100px;
+    display: flex;
+    overflow: hidden;
+}
+section.records .scroll {
+    margin: 0 auto;
+    overflow-y: auto;
+    height: 500px;
+    width: 455px;
+    padding-top: 80px;
+}
+section.records .scroll::-webkit-scrollbar {
+    width: 5px;
+}
+section.records .scroll::-webkit-scrollbar-thumb {
+    background: #000;
+}
+section.records .scroll::-webkit-scrollbar-track {
+    background: #ddd;
+}
+/*  */
+section.records ul {
+    margin: 0 auto;
+}
+section.records li.line div{
+    flex: auto;
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+}
+section.records li.line div.blank {
+    color: #fb4;
+}
+section.records li.line {
+    background: #1a73e8;
+}
+section.records li {
+    display: flex;
+    height: 60px;
+    width: 450px;
+    background: #8cb9f3;
+    border-radius: 10px;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+section.records li input{
+    background: #8cb9f3;
+    display: block;
+    height: 40px;
+    padding-left: 20px;
+    width: 150px;
+    border-right: 1px dotted #444;
+}
+section.records .input-list .complete {
+    background: #9baae4;
+    color: #666;
+    padding: 10px;
+    border-radius: 10px;
+}
+section.records .record-list li div{
+    /* flex: */
+    text-align: center;
+    width: 110px;
+}
+section.records .record-list li button {
+    background: #fb4;
+    margin-left: 30px;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 70px
+}
+section.records .record-list li.line {
+    position: absolute;
+    transform: translate(0, -80px);
+}

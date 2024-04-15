@@ -1,0 +1,347 @@
+@import url("../common.css");
+@import url("./sub.css");
+
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 300;
+  font-family: "Noto Sans", sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+/* css작업 */
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+  background: #fff;
+  display: flex;
+}
+
+/* class 추가 포인트 */
+
+.day-color-opacity {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.weekend-color {
+  color: #e85e36;
+}
+
+/* header */
+
+header {
+  position: relative;
+  height: 70px;
+  background: #1a73e8;
+  /* border-bottom: 1px solid #e6e6e6; */
+}
+header #user-name {
+  position: absolute;
+  right: 30%;
+  top: 50%;
+  transform: translate(0, -50%);
+  align-content: center;
+  font-size: 14px;
+  height: 30px;
+  color: #fff;
+}
+
+.inner {
+  width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 7px;
+}
+
+
+
+/* gnb */
+
+.gnb {
+  display: flex;
+}
+
+.gnb i {
+  color: #8cb9f3;
+  font-size: 22px;
+}
+
+.gnb li {
+  margin-right: 80px;
+}
+
+.gnb li:hover a i {
+  color: #fff;
+}
+
+/* add icon */
+
+.add-icon {
+  display: flex;
+  align-items: center;
+}
+
+.add-icon p {
+  color: #fff;
+  margin-right: 15px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.fas.fa-plus {
+  color: #1a73e8;
+  font-size: 16px;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  background: #fff;
+  border-radius: 40px;
+}
+
+/* sub 큰틀 */
+.sub {
+  /* background: #d1cece; */
+  width: 300px;
+  border-left: 1px solid #e6e6e6;
+  padding-top: 10px;
+  /* border-right: none; */
+}
+
+/* 내가 작업할 메인 */
+.main {
+  width: 900px;
+  /* position: relative; */
+  /* background-color: #dcdcdc; */
+  /* border: 1px solid #e6e6e6; */
+}
+
+/* modal */
+
+.modal-overlay {
+  position: absolute;
+  z-index: 9999999;
+  top: 170px;
+  left: 370px;
+  width: 340px;
+  height: 275px;
+  right: 0;
+  bottom: 0;
+  display: none;
+  /* 기본적으로 숨김 */
+}
+
+.show {
+  display: block;
+}
+
+.modal-content {
+  /* width: 340px; */
+  /* height: 270px; */
+  background: white;
+  border: 1px solid #eeeeee;
+  box-shadow: 0 0 10px 2px rgba(169, 169, 169, 0.3);
+  padding: 25px;
+  border-radius: 10px;
+}
+.modal-title {
+  display: flex;
+  justify-content: center;
+}
+.modal-title input {
+  width: 280px;
+  margin-bottom: 15px;
+  /* background: #000; */
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.modal-memo {
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  height: 130px;
+  padding: 15px;
+}
+
+.memo-text {
+  /* background: #b6b5b5; */
+  width: 100%;
+  height: 100%;
+  row-gap: 30;
+  border: none;
+  resize: none;
+  outline: none;
+  font-size: 16px;
+  resize: none;
+}
+
+.modal-button {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-button button {
+  background: #d9d9d9;
+  width: 100px;
+  height: 35px;
+  border-radius: 3px;
+  color: #fff;
+  margin-top: 15px;
+  /* font-size: 4px; */
+  font-weight: 400;
+}
+
+.modal-button button:hover {
+  background: #1a73e8;
+}
+
+.modal-delete {
+  margin-right: 6px;
+}
+/* 모달 끝 */
+/* main 시작 */
+
+.main-top {
+  /* background-color: #999999; */
+  height: 90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px 0 0;
+}
+
+.main-top p {
+  font-size: 29px;
+  font-weight: 400;
+  color: #1a73e8;
+}
+
+/* main-top button */
+.main-top-button {
+  display: flex;
+  border: 1px solid #e6e6e6;
+  border-radius: 15px;
+}
+
+.main-top-button i {
+  padding: 8px 13px;
+  color: #939393;
+}
+
+.main-top-button i:hover {
+  color: #5e5e5e;
+}
+
+/* main-calender ul.week 요일 부분 */
+ul.week {
+  display: flex;
+  width: 100%;
+}
+
+.week li {
+  width: calc(100% / 7);
+  padding: 8px 15px;
+  border: 1px solid #e6e6e6;
+  border-left: none;
+  border-bottom: none;
+}
+
+.week li:nth-child(7) {
+  border-right: none;
+}
+
+.week li p {
+  color: #939393;
+  font-size: 13px;
+}
+
+/* ul.date 일 부분 */
+.date {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.date li {
+  width: calc(100% / 7);
+  height: 120px;
+  padding: 8px;
+  border: 1px solid #e6e6e6;
+  border-left: none;
+  border-bottom: none;
+}
+
+.day-box-day p {
+  width: 27px;
+  height: 27px;
+  text-align: center;
+  line-height: 25px;
+}
+
+.date li:nth-child(1),
+.date li:nth-child(2),
+.date li:nth-child(3),
+.date li:nth-child(4),
+.date li:nth-child(5),
+.date li:nth-child(6),
+.date li:nth-child(7) {
+  border-top: none;
+}
+
+.date li:nth-child(7n) {
+  border-right: none;
+}
+
+.date li:nth-child(7n + 1) {
+  color: #e85e36;
+}
+
+/* js class 추가 */
+
+/* 클릭하면 회색 배경으로 변경됨 */
+.click-bg {
+  background-color: #eeeeee;
+}
+
+/* 일정 추가되면 원형으로 변경됨 */
+
+.circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+
+  background: #1a73e8;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.memo-text-box {
+  color: #fff;
+  background: #1a73e8;
+  border-radius: 5px;
+  margin-top: 5px;
+  font-size: 12px;
+  padding: 3px;
+  width: 100%;
+  text-align: left;
+}
+
+.day-box-memo-button {
+  color: #fff;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}

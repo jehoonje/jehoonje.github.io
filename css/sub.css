@@ -1,0 +1,136 @@
+.sub_mini_calender {
+  padding: 30px 0 0 40px;
+}
+
+.sub #wrap_calendar {
+  margin-bottom: 20px;
+}
+
+#wrap_calendar .nav_calendar {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.nav_calendar {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tit_calendar {
+  font-size: 18px;
+  color: rgb(26, 115, 232);
+  font-weight: 400;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  color: #939393;
+  font-size: 13px;
+}
+
+.btn_prev {
+  margin-right: 20px;
+}
+
+.line {
+  border-bottom: 1px solid gray;
+  padding-bottom: 74px;
+  opacity: 0.2;
+}
+
+.area_calendar .row {
+  margin-bottom: 3px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.area_calendar .coulmn {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.minus-icon {
+  color: #939393;
+  margin-left: 5px;
+}
+
+.sunday {
+  color: #e85e36;
+}
+
+.disabled {
+  opacity: 0.2;
+}
+
+/* 기록하기 버튼 클릭하여 저장했을 시 서브 캘린더에 스탬프 찍히도록 하기 */
+.txt_day {
+  cursor: pointer;
+  position: relative;
+  z-index: 999;
+}
+
+.circle {
+  width: 25px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background: #1a73e8;
+  border-radius: 50%;
+  color: #fff;
+}
+
+/* 하단 일정 추가 부분 */
+.event_day_wrap {
+  padding: 64px 0 0 40px;
+}
+
+.event_day_wrap .event_day {
+  font-weight: 500;
+}
+
+.list_agenda {
+  width: 100%;
+  margin-top: 30px;
+  font-weight: 400;
+  border-left: 6px solid #1a73e8;
+  visibility: hidden;
+  transform: translateY(50%);
+}
+
+.agenda_show {
+  visibility: visible;
+  transform: translate(0, 0);
+  transition: 1s;
+}
+
+.area_tit {
+  padding: 8px 0 8px 10px;
+}
+
+.event_content {
+  font-size: 15px;
+  line-height: 130%;
+  width: 100%;
+}
+
+.event_memo {
+  margin-top: 8px;
+  width: 100%;
+  line-height: 150%;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#stamp {
+  display: inline-block;
+  color: rgb(26, 115, 232);
+  font-size: 12px;
+  opacity: 0.7;
+}

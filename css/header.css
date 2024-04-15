@@ -1,0 +1,38 @@
+@import url("../common.css");
+
+/* header */
+
+header {
+  height: 70px;
+  background: #1a73e8;
+  /* border-bottom: 1px solid #e6e6e6; */
+}
+
+.inner {
+  width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 7px;
+}
+
+/* gnb */
+
+.gnb {
+  display: flex;
+}
+
+.gnb i {
+  color: #8cb9f3;
+  font-size: 22px;
+}
+
+.gnb li {
+  margin-right: 80px;
+}
+
+.gnb li:hover a i {
+  color: #fff;
+}

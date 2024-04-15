@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="../css/record.css" />
+        <script src="../js/record.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <div class="inner">
+              <ul class="gnb">
+                <li class="home"><a href="../html/choice.html" title="HOME"><i class="fas fa-home"></i></a></li>
+                <li class="record"><a href="../html/record.html"><i class="far fa-edit"></i></a></a></li>
+                <li class="calender"><a href="../html/maincalender.html"><i class="far fa-calendar-check"></i></a></a></li>
+                <li class="home"><a href="./map.html" title="map"><i class="far fa-map"></i></a></li>
+                <p id="user-name"></p>
+            </ul>
+              <div class="add-icon">
+                <p></p>
+                <i class="fas fa-plus"></i>
+              </div>
+            </div>
+          </header>
+        <div class="wrap">
+            <h2 id="page-name">My Running Diary</h2>
+            <section class="records">
+                <ul class="input-list">
+                    <li class="line record">
+                        <div><span class="date">날짜</span></div>
+                        <div><span class="length">거리</span></div>
+                        <div><span class="time">시간(분)</span></div>
+                    </li>
+                    <li class="input record">
+                        <div><input id="date-input" type="number" min="0" placeholder="0404"></div>
+                        <div><input id="length-input" type="number" min="0" placeholder="(km)"></div>
+                        <div><input id="time-input" type="number" placeholder="(minute)"></div>
+                    </li>
+                    <button class="complete">기록하기</button>
+                </ul>
+                <div class="scroll">
+                <ul class="record-list">
+                    <li class="line ex-record">
+                        <div><span class="date">날짜</span></div>
+                        <div><span class="length">거리</span></div>
+                        <div><span class="time">시간</span></div>
+                        <div><span title="minute/km">페이스</span></div>
+                        <div class="blank">삭제</div>
+                    </li>
+                    <!-- <li data-id="1" class="ex-record">
+                        <div><span class="date">04월04일</span></div>
+                        <div><span class="length">4km</span></div>
+                        <div><span class="time">1시간</span></div>
+                        <button class="remove-record">삭제하기</button>
+                    </li>
+                    <li data-id="2" class="ex-record">
+                        <div><span class="date">04월05일</span></div>
+                        <div><span class="length">10km</span></div>
+                        <div><span class="time">2시간</span></div>
+                        <button class="remove-record">삭제하기</button>
+                    </li>
+                    <li data-id="3" class="ex-record">
+                        <div><span class="date">04월06일</span></div>
+                        <div><span class="length">4km</span></div>
+                        <div><span class="time">1시간</span></div>
+                        <button class="remove-record">삭제하기</button>
+                    </li> -->
+                </ul>
+                </div>
+            </section>
+        </div>
+    </body>
+</html>

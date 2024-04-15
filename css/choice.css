@@ -1,0 +1,160 @@
+@import url(../common.css);
+
+
+body {
+  background: #1a73e8;
+}
+div.wrap {
+  width: 1200px;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: #1A73E8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+div section {
+  /* border: 2px solid #000; */
+  border-radius: 30px;
+  width: 80%;
+  height: 80%;
+  display: flex;
+  ;
+  flex-direction: column;
+}
+.header {
+  /* border: 2px solid #000; */
+  width: 100%;
+  height: 10%;
+  color: rgb(131, 131, 131);
+  margin: 5% 0;
+  padding: 5% auto;
+  
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  
+}
+section .container {
+  /* border: 2px solid #000; */
+  width: 90%;
+  margin-left: 5%;
+  height: 30%;
+  
+  
+
+}
+section .container h1 {
+  font-size: 4em;
+  font-family: "Noto Sans", sans-serif;
+  /* letter-spacing: 2px; */
+  color: #fff;
+  font-weight: bold;
+}
+section .container h2 {
+  /* border: 2px solid #000; */
+  border-radius: 10px;
+  /* display: flex; */
+  /* justify-content: center; */
+  align-items: center;
+  color: #FFF;
+  height: 70px;
+  font-weight: 100px;
+  padding-top: 20px;
+  font-size: 1.5em;
+}
+
+section .container .sub-container {
+  /* border: 2px solid #000; */
+  border-top: 20%;
+  text-align: center;
+  height: 100%;
+}
+
+section .container .record-Btn {
+  /* border: 2px solid #000; */
+  margin-top: 10%;
+  margin-right: 5%;
+  background: rgb(240, 240, 240);
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  display: inline-block; 
+  align-content: center;
+  /* width: max-content; */
+
+  
+}
+
+
+section .container .record-Btn .far {
+  /* background: red; */
+  font-size: 90px;
+  margin-left: 20px;
+}
+section .container .record-Btn div {
+  font-size: 30px;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+section .container .record-Btn:hover {
+  background: yellowgreen;
+  color: #000;
+}
+section .container .map-Btn {
+  /* border: 2px solid #000; */
+  margin-top: 10%;
+  margin-right: 5%;
+  background: rgb(240, 240, 240);
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  align-content: center;
+  display: inline-block; /* 인라인 요소를 블록 요소로 변환하여 너비와 높이 속성이 적용되도록 함 */
+  /* width: max-content; */
+
+  
+}
+section .container .map-Btn .far {
+  /* background: red; */
+  font-size: 90px;
+}
+section .container .map-Btn div {
+  font-size: 30px;
+  margin-top: 10px;
+}
+section .container .map-Btn:hover {
+  background: rgb(255, 175, 28);
+  color: #000;
+}
+
+section .container .cal-Btn {
+/* border: 2px solid #000; */
+border-radius: 50%;
+background: rgb(240, 240, 240);
+margin-top: 10%;
+display: flex;
+/* align-items: center; */
+align-content: center;
+width: 230px;
+height: 230px;
+display: inline-block; 
+/* width: max-content; */
+}
+section .container .cal-Btn .far {
+  /* background: red; */
+  font-size: 90px;
+}
+section .container .cal-Btn div {
+  font-size: 30px;
+  margin-top: 10px;
+}
+section .container .cal-Btn:hover {
+  background: rgb(255, 137, 231);
+  color: #000;
+}

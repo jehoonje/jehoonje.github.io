@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- css -->
+    <link rel="stylesheet" href="../css/maincalender.css" />
+    <!-- js -->
+    <script src="../js/calender.js" defer></script>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="inner">
+          <ul class="gnb">
+            <li class="home">
+              <a href="./choice.html" title="HOME"
+                ><i class="fas fa-home"></i
+              ></a>
+            </li>
+            <li class="record">
+              <a href="../html/record.html"><i class="far fa-edit"></i></a>
+            </li>
+            <li class="calender">
+              <a href="../html/maincalender.html"
+                ><i class="far fa-calendar-check"></i
+              ></a>
+            </li>
+            <li class="home">
+              <a href="./map.html" title="map"><i class="far fa-map"></i></a>
+            </li>
+            <p id="user-name"></p>
+          </ul>
+          <!-- <div class="add-icon">
+            <p>기록추가</p>
+            <i class="fas fa-plus"></i>
+          </div> -->
+        </div>
+      </header>
+      <div class="container">
+        <div class="main">
+          <!-- 모달창 -->
+
+          <div class="modal-overlay">
+            <div class="modal-content">
+              <div class="modal-title">
+                <input type="text" maxlength="17" placeholder="일정제목" />
+              </div>
+              <div class="modal-memo">
+                <textarea
+                  class="memo-text"
+                  maxlength="59"
+                  placeholder="내용을 입력하세요."
+                ></textarea>
+              </div>
+              <div class="modal-button">
+                <button class="modal-delete">삭제</button>
+                <button class="modal-save">저장</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 현재 날짜 -->
+          <div class="main-top">
+            <div class="date">
+              <p>April 2024</p>
+            </div>
+            <div class="main-top-button">
+              <div class="before">
+                <button><i class="fas fa-chevron-left"></i></button>
+              </div>
+              <div class="after">
+                <button><i class="fas fa-chevron-right"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 달력 부분 -->
+          <div class="main-calender">
+            <ul class="week">
+              <li class="sun"><p>일</p></li>
+              <li class="mon"><p>월</p></li>
+              <li class="tue"><p>화</p></li>
+              <li class="wed"><p>수</p></li>
+              <li class="thur"><p>목</p></li>
+              <li class="fri"><p>금</p></li>
+              <li class="sat"><p>토</p></li>
+            </ul>
+            <ul class="date">
+              <li class="day-box">
+                <div class="day-box-day day-color-opacity"><p>31</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box click-bg">
+                <div class="day-box-day"><p>1</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>2</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>3</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>4</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>5</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>6</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>7</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>8</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>9</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>10</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>11</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>12</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>13</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>14</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>15</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>16</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>17</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>18</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>19</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>20</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>21</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>22</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>23</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>24</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>25</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>26</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>27</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>28</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>29</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day"><p>30</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day day-color-opacity"><p>1</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day day-color-opacity"><p>2</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day day-color-opacity"><p>3</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+              <li class="day-box">
+                <div class="day-box-day day-color-opacity"><p>4</p></div>
+                <div class="day-box-memo"></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- sub -->
+        <div class="sub">
+          <!-- sub캘린더 타이틀 -->
+          <div class="sub_mini_calender">
+            <div id="wrap_calendar">
+              <div class="nav_calendar">
+                <strong class="tit_calendar"
+                  >April 2024
+                  <button><i class="fas fa-chevron-down"></i></button>
+                </strong>
+                <div class="tit_btn">
+                  <button class="btn_prev">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="btn_next">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- sub캘린더 일자부분 -->
+            <div id="miniCal">
+              <div
+                class="area_calendar area_day"
+                role="grid"
+                aria-labelledby="accessCalendar1"
+              >
+                <div class="row row_header" role="row">
+                  <div class="coulmn sunday" role="columnheader">일</div>
+                  <div class="coulmn" role="columnheader">월</div>
+                  <div class="coulmn" role="columnheader">화</div>
+                  <div class="coulmn" role="columnheader">수</div>
+                  <div class="coulmn" role="columnheader">목</div>
+                  <div class="coulmn" role="columnheader">금</div>
+                  <div class="coulmn" role="columnheader">토</div>
+                </div>
+
+                <div class="row" role="row">
+                  <div
+                    class="coulmn disabled sunday"
+                    role="gridcell"
+                    data-date-str="20240331"
+                  >
+                    <span class="txt_day" role="button"> 31 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240401">
+                    <span class="txt_day" role="button"> 1 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240402">
+                    <span class="txt_day" role="button"> 2 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240403">
+                    <span class="txt_day" role="button"> 3 </span>
+                  </div>
+
+                  <div
+                    class="coulmn select today"
+                    role="gridcell"
+                    data-date-str="20240404"
+                  >
+                    <span class="txt_day" role="button">
+                      <span class="screen_out"> </span> 4
+                    </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240405">
+                    <span class="txt_day" role="button"> 5 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240406">
+                    <span class="txt_day" role="button"> 6 </span>
+                  </div>
+                </div>
+
+                <div class="row" role="row">
+                  <div
+                    class="coulmn sunday"
+                    role="gridcell"
+                    data-date-str="20240407"
+                  >
+                    <span class="txt_day" role="button"> 7 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240408">
+                    <span class="txt_day" role="button"> 8 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240409">
+                    <span class="txt_day" role="button"> 9 </span>
+                  </div>
+
+                  <div
+                    class="coulmn holiday"
+                    role="gridcell"
+                    data-date-str="20240410"
+                  >
+                    <span class="txt_day" role="button"> 10 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240411">
+                    <span class="txt_day" role="button"> 11 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240412">
+                    <span class="txt_day" role="button"> 12 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240413">
+                    <span class="txt_day" role="button"> 13 </span>
+                  </div>
+                </div>
+
+                <div class="row" role="row">
+                  <div
+                    class="coulmn sunday"
+                    role="gridcell"
+                    data-date-str="20240414"
+                  >
+                    <span class="txt_day" role="button"> 14 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240415">
+                    <span class="txt_day" role="button"> 15 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240416">
+                    <span class="txt_day" role="button"> 16 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240417">
+                    <span class="txt_day" role="button"> 17 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240418">
+                    <span class="txt_day" role="button"> 18 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240419">
+                    <span class="txt_day" role="button"> 19 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240420">
+                    <span class="txt_day" role="button"> 20 </span>
+                  </div>
+                </div>
+
+                <div class="row" role="row">
+                  <div
+                    class="coulmn sunday"
+                    role="gridcell"
+                    data-date-str="20240421"
+                  >
+                    <span class="txt_day" role="button"> 21 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240422">
+                    <span class="txt_day" role="button"> 22 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240423">
+                    <span class="txt_day" role="button"> 23 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240424">
+                    <span class="txt_day" role="button"> 24 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240425">
+                    <span class="txt_day" role="button"> 25 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240426">
+                    <span class="txt_day" role="button"> 26 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240427">
+                    <span class="txt_day" role="button"> 27 </span>
+                  </div>
+                </div>
+
+                <div class="row" role="row">
+                  <div
+                    class="coulmn sunday"
+                    role="gridcell"
+                    data-date-str="20240428"
+                  >
+                    <span class="txt_day" role="button"> 28 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240429">
+                    <span class="txt_day" role="button"> 29 </span>
+                  </div>
+
+                  <div class="coulmn" role="gridcell" data-date-str="20240430">
+                    <span class="txt_day" role="button"> 30 </span>
+                  </div>
+
+                  <div
+                    class="coulmn disabled"
+                    role="gridcell"
+                    data-date-str="20240501"
+                  >
+                    <span class="txt_day" role="button"> 1 </span>
+                  </div>
+
+                  <div
+                    class="coulmn disabled"
+                    role="gridcell"
+                    data-date-str="20240502"
+                  >
+                    <span class="txt_day" role="button"> 2 </span>
+                  </div>
+
+                  <div
+                    class="coulmn disabled"
+                    role="gridcell"
+                    data-date-str="20240503"
+                  >
+                    <span class="txt_day" role="button"> 3 </span>
+                  </div>
+
+                  <div
+                    class="coulmn disabled"
+                    role="gridcell"
+                    data-date-str="20240504"
+                  >
+                    <span class="txt_day" role="button"> 4 </span>
+                  </div>
+                </div>
+
+                <div class="row" role="row">
+                  <div
+                    class="coulmn disabled sunday holiday"
+                    role="gridcell"
+                    data-date-str="20240505"
+                  >
+                    <span class="txt_day" role="button"> 5 </span>
+                  </div>
+
+                  <div
+                    class="coulmn disabled holiday"
+                    role="gridcell"
+                    data-date-str="20240506"
+                  >
+                    <span class="txt_day" role="button"> 6 </span>
+                  </div>
+
+                  <div
+                    class="coulmn disabled"
+                    role="gridcell"
+                    data-date-str="20240507"
+                  >
+                    <span class="txt_day" role="button"> 7 </span>
+                  </div>
+
+                  <div
+                    class="coulmn disabled"
+                    role="gridcell"
+                    data-date-str="20240508"
+                  >
+                    <span class="txt_day" role="button"> 8 </span>
+                  </div>
+
+                  <div
+                    class="coulmn disabled"
+                    role="gridcell"
+                    data-date-str="20240509"
+                  >
+                    <span class="txt_day" role="button"> 9 </span>
+                  </div>
+
+                  <div
+                    class="coulmn disabled"
+                    role="gridcell"
+                    data-date-str="20240510"
+                  >
+                    <span class="txt_day" role="button"> 10 </span>
+                  </div>
+
+                  <div
+                    class="coulmn disabled"
+                    role="gridcell"
+                    data-date-str="20240511"
+                  >
+                    <span class="txt_day" role="button"> 11 </span>
+                  </div>
+                </div>
+
+                <br />
+                <span id="stamp"
+                  >＊목표 달성일의 스탬프를 찍어 확인하세요.</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- 하단 일정 추가부분 -->
+          <div class="event_day_wrap">
+            <strong class="event_day">4월 5일</strong>
+            <i class="minus-icon fas fa-trash-alt"></i>
+
+            <div class="list_agenda">
+              <div class="area_tit">
+                <p class="event_content">일정제목</p>
+                <p class="event_memo">내용을 입력했다요</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Running Map</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <link rel="stylesheet" href="../css/map.css">
+  <script type="module" src="../js/map.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="inner">
+      <ul class="gnb">
+        <li class="home"><a href="../html/choice.html" title="HOME"><i class="fas fa-home"></i></a></li>
+        <li class="record"><a href="../html/record.html"><i class="far fa-edit"></i></a></a></li>
+        <li class="calender"><a href="../html/maincalender.html"><i class="far fa-calendar-check"></i></a></a></li>
+        <li class="home"><a href="./map.html" title="HOME"><i class="far fa-map"></i></a></li>
+        <p id="user-name"></p>
+      </ul>
+      <div class="add-icon">
+        <p>DELETE ALL</p>
+        <i class="fas fa-plus"></i>
+      </div>
+    </div>
+  </header>
+  <div class="wrap">
+    
+    <div class="container">
+      <div class="main-content">
+        <h1><a href="./map.html">Running Map</a></h1>
+        
+      </div>
+      <div class="sub-content" id="map">
+
+      </div>
+      
+    </div>
+  </div>
+  <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+    ({key: "AIzaSyDXrR2iQ64LKmH7QxMi8R3taNvM-ju25B4", v: "weekly"});</script>
+  </script>
+  
+  
+</body>
+</html>
