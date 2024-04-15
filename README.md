@@ -18,6 +18,8 @@
 
 
 ## 배포 주소 : [jehoonje.github.io](https://jehoonje.github.io)
+## 레포지토리 주소 : [6jo_mini](https://github.com/jo20246jo/6jo_mini)
+
 
 
 
