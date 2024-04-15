@@ -9,7 +9,7 @@
 
 ## 프로젝트 정보
 
-### 단체 : Every Run Crew
+### 팀명 : Every Run Crew
 ### 목적 : Html, CSS, JavaScript 의 활용
 ### 개발 기간 : 2024.04.04 ~ 2024.04.14
 
