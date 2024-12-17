@@ -1,43 +1,46 @@
 # .github/workflows/deploy.yml
-name: Deploy React App
+name: Deploy React App to jehoonje.github.io
 
 on:
   push:
     branches:
-      - main
+      - main  # main 브랜치에 푸시될 때 실행됩니다.
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. 레포지토리 체크아웃
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # 2. Node.js 환경 설정
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
 
+      # 3. 의존성 설치
       - name: Install dependencies
         run: |
-          cd portfolio
           npm install
 
-      - name: Build the React app
+      # 4. React 프로젝트 빌드
+      - name: Build the project
         run: |
-          cd portfolio
           npm run build
 
-      - name: Deploy to GitHub Pages
+      # 5. 빌드된 파일을 루트로 이동
+      - name: Move build files to root
         run: |
-          cd portfolio/build
-          cp -r * ../..
-          cd ../..
+          cp -r build/* .
+
+      # 6. 빌드된 파일을 main 브랜치에 커밋하고 푸시
+      - name: Commit and push to main
+        run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "Deploy React app [skip ci]"
+          git commit -m "Deploy React build [skip ci]" || echo "No changes to commit"
           git push origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
