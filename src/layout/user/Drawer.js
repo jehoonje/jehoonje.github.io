@@ -10,7 +10,6 @@ import {
   faPhone,
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
-import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { motion } from "framer-motion";
 import { PulseLoader } from "react-spinners";
 
