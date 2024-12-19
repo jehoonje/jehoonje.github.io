@@ -88,9 +88,35 @@ const MainNavigation = ({ drawerOpen, onToggleDrawer }) => {
           <div className={styles.title}>{titleText}</div>
         </div>
         <div className={styles.menu}>
-          <button className={styles.menuButton}>Email</button>
-          <button className={styles.menuButton}>Blog</button>
-          <button className={styles.menuButton}>GitHub</button>
+          {/* Email 버튼: 클릭 시 이메일 클라이언트 열림 */}
+          <button
+            className={styles.menuButton}
+            onClick={() =>
+              (window.location.href = "mailto:limjhoon8@gmail.com")
+            }
+          >
+            Email
+          </button>
+
+          {/* Blog 버튼: 클릭 시 Blog 링크로 이동 */}
+          <button
+            className={styles.menuButton}
+            onClick={() =>
+              window.open("https://bluebellybird.bearblog.dev", "_blank")
+            }
+          >
+            Blog
+          </button>
+
+          {/* GitHub 버튼: 클릭 시 GitHub 링크로 이동 */}
+          <button
+            className={styles.menuButton}
+            onClick={() => window.open("https://github.com/jehoonje", "_blank")}
+          >
+            GitHub
+          </button>
+
+          {/* Language 드롭다운 메뉴 */}
           <div className={styles.languageWrapper}>
             <button className={styles.language} onClick={handleLanguageToggle}>
               Language <FontAwesomeIcon icon={faChevronDown} />
