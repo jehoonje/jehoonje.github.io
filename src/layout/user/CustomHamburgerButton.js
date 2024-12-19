@@ -1,22 +1,21 @@
 // CustomHamburgerButton.jsx
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import React from "react";
+import styled, { keyframes } from "styled-components";
 
-const accentColor = 'hsl(0, 0.00%, 11.80%)';
+const accentColor = "hsl(0, 0.00%, 11.80%)";
 
 const Span = styled.span`
   position: absolute;
-  width: 35px;
-  height: 4px;
-  top: 50%;
-  right: -25px;
+  width: 20px;
+  height: 2px;
+  top: 80%;
   background: hsl(0, 0%, 15%);
   border-radius: 2px;
   overflow: hidden;
   transition: all 0.3s linear;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 0;
     height: 100%;
@@ -27,22 +26,26 @@ const Span = styled.span`
   }
 
   &:nth-child(1) {
-    animation: ${(props) => (props.open ? spanFirstOn : spanFirstOff)} 0.5s ease-in-out forwards;
+    animation: ${(props) => (props.open ? spanFirstOn : spanFirstOff)} 0.5s
+      ease-in-out forwards;
   }
 
   &:nth-child(2) {
-    animation: ${(props) => (props.open ? spanSecondOn : spanSecondOff)} 0.5s ease-in-out forwards;
+    animation: ${(props) => (props.open ? spanSecondOn : spanSecondOff)} 0.5s
+      ease-in-out forwards;
   }
 
   &:nth-child(3) {
-    animation: ${(props) => (props.open ? spanThirdOn : spanThirdOff)} 0.5s ease-in-out forwards;
+    animation: ${(props) => (props.open ? spanThirdOn : spanThirdOff)} 0.5s
+      ease-in-out forwards;
   }
 `;
 
 const Button = styled.button`
   position: relative;
   width: 20px;
-  height: 35px;
+  height: 0px;
+  margin-bottom: 3px;
   background: none;
   border: none;
   cursor: pointer;

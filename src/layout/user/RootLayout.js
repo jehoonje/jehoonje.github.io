@@ -32,6 +32,7 @@ const Container = styled(motion.div).withConfig({
   @media (max-width: ${breakpoints.desktop}) {
       height: ${(props) => (props.fullHeight ? '100vh' : 'auto')};
       padding: 0 0.75rem;
+      margin-top: 20px !important;
       border: 2px solid #f5f5f5; /* 테블릿 이하에서 border 두께 줄이기 */
       width: 95%; /* 너비를 조금 더 줄임 */
   }

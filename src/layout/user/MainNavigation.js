@@ -2,15 +2,26 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./MainNavigation.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import styled from 'styled-components';
-import CustomHamburgerButton from './CustomHamburgerButton'; // 커스텀 버튼 임포트
+import { faBars, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+import CustomHamburgerButton from "./CustomHamburgerButton"; // 커스텀 버튼 임포트
 
 const MainNavigation = ({ drawerOpen, onToggleDrawer }) => {
   const [openNotice, setOpenNotice] = useState(false);
   const noticeRef = useRef(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
   const [isOpen, setIsOpen] = useState(false);
+
+  // 언어 상태 관리
+  const [language, setLanguage] = useState("한국어");
+  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
+
+  // 언어 변경에 따른 제목과 소개 텍스트
+  const titleText = language === "English" ? "Jehoon Lim" : "임제훈";
+  const introText =
+    language === "English"
+      ? "I am a developer who helps businesses grow through web and app development. I focus on creating simple."
+      : "웹과 앱을 통해 비즈니스의 성장을 돕는 개발자입니다. 심플하면서도 최적의 사용자 경험과 성능을 추구하며 사용자들의 문제 해결에 집중합니다.";
 
   useEffect(() => {
     const handleResize = () => {
@@ -23,12 +34,17 @@ const MainNavigation = ({ drawerOpen, onToggleDrawer }) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (noticeRef.current && !noticeRef.current.contains(event.target)) {
+      if (
+        noticeRef.current &&
+        !noticeRef.current.contains(event.target) &&
+        !event.target.closest(`.${styles.language}`)
+      ) {
         setOpenNotice(false);
+        setIsLanguageDropdownOpen(false);
       }
     };
 
-    if (openNotice) {
+    if (openNotice || isLanguageDropdownOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -37,28 +53,67 @@ const MainNavigation = ({ drawerOpen, onToggleDrawer }) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [openNotice]);
+  }, [openNotice, isLanguageDropdownOpen]);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
     onToggleDrawer();
   };
 
+  const handleLanguageToggle = () => {
+    setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
+  };
+
+  const handleLanguageSelect = (lang) => {
+    setLanguage(lang);
+    setIsLanguageDropdownOpen(false);
+  };
+
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
-        <div className={styles.right}>
-          {isMobile ? (
-            <CustomHamburgerButton open={isOpen} onClick={handleToggle} />
-          ) : (
-            <StyledHamburgerButton
-              className={`${styles.icon} ${styles.hamburger}`}
-              onClick={onToggleDrawer}
-            >
-              <FontAwesomeIcon icon={faBars} />
-            </StyledHamburgerButton>
-          )}
+        <div className={styles.menu}>
+          <div className={styles.right}>
+            {isMobile ? (
+              <CustomHamburgerButton open={isOpen} onClick={handleToggle} />
+            ) : (
+              <StyledHamburgerButton
+                className={`${styles.icon} ${styles.hamburger}`}
+                onClick={onToggleDrawer}
+              >
+                <FontAwesomeIcon icon={faBars} />
+              </StyledHamburgerButton>
+            )}
+          </div>
+          <div className={styles.title}>{titleText}</div>
         </div>
+        <div className={styles.menu}>
+          <button className={styles.menuButton}>Email</button>
+          <button className={styles.menuButton}>Blog</button>
+          <button className={styles.menuButton}>GitHub</button>
+          <div className={styles.languageWrapper}>
+            <button className={styles.language} onClick={handleLanguageToggle}>
+              Language <FontAwesomeIcon icon={faChevronDown} />
+            </button>
+            {isLanguageDropdownOpen && (
+              <div className={styles.languageDropdown}>
+                <button
+                  className={styles.dropdownButton}
+                  onClick={() => handleLanguageSelect("English")}
+                >
+                  English
+                </button>
+                <button
+                  className={styles.dropdownButton}
+                  onClick={() => handleLanguageSelect("한국어")}
+                >
+                  한국어
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+        <div className={styles.intro}>{introText}</div>
       </nav>
     </header>
   );
@@ -73,7 +128,7 @@ const StyledHamburgerButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    color: #D88254;
+    color: #d88254;
   }
 
   @media screen and (max-width: 480px) {

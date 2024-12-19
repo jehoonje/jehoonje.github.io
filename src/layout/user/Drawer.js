@@ -38,8 +38,12 @@ const DrawerContainer = styled(motion.div)`
   justify-content: center; 
   align-items: center; 
 
+  @media (max-width: ${breakpoints.desktop}) {
+    margin-top: 100px;
+    justify-content: flex-start; 
+  }
   @media (max-width: ${breakpoints.tablet}) {
-    margin-top: 50px;
+    margin-top: 100px;
     justify-content: flex-start; 
     width: 138px;
   }
@@ -179,9 +183,9 @@ const LeftDrawerContainer = styled(motion.div)`
 const CloseButton = styled(motion.button)`
   position: absolute;
   top: 20%;
-  left: 0%;
-  width: 100px;
-  height: 100px;
+  left: -5%;
+  width: 90px;
+  height: 90px;
   background-color: #333;
   border: 5px solid #333;
   border-top-right-radius: 30px;

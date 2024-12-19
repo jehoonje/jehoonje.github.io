@@ -1,4 +1,5 @@
 /* MainNavigation.module.scss */
+
 .header {
   background-color: #fff;
   border-bottom: 2px solid #f5f5f5;
@@ -8,26 +9,143 @@
   color: #333;
   z-index: 1500;
   width: 100%;
-  padding-bottom: 5px;
 
   .nav {
     width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between; /* 데스크탑에서 space-between 적용 */
+    align-items: center; /* 수직 중앙 정렬 */
+    padding: 0 20px; /* 좌우 패딩 추가 */
   }
 
   .right {
-    flex: 1;
     display: flex;
     align-items: center;
     justify-content: flex-start;
   }
 
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    margin-left: 10px;
+    letter-spacing: 0.8px;
+
+    @media screen and (max-width: 480px) {
+      margin-left: 0px;
+      letter-spacing: 1.2px;
+    }
+  }
+
+  .languageWrapper {
+    position: relative;
+    display: flex;
+  }
+
+  .language {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #333;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #D88254;
+    }
+
+    @media screen and (max-width: 480px) {
+      padding: 2px 0px !important;
+      font-size: 14px !important;
+      letter-spacing: 0.7px;
+    }
+  }
+
+  .languageDropdown {
+    position: absolute;
+    top: 118%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #f5f5f5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dropdownButton {
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 14px;
+    cursor: pointer;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: #f0f0f0;
+      color: #D88254;
+    }
+  }
+
+  .intro {
+    flex: 0 0 auto; 
+    width: 50%;
+    text-align: left;
+    font-size: 14px;
+    padding: 0 20px;
+
+    @media screen and (max-width: 480px) {
+      width: 100% !important; 
+      font-size: 12px !important;
+      padding: 3px 0px !important;
+    }
+  }
+
+  .menu {
+    display: flex;
+
+    @media screen and (max-width: 480px) {
+      flex-direction: row;
+      justify-content: space-between !important; /* 모바일에서 좌우 양 끝으로 */
+      align-items: center !important;
+      margin: 0;
+      width: 100% !important;
+    }
+  }
+
+  .menuButton {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #333;
+    padding: 8px 12px;
+    transition: color 0.3s;
+    letter-spacing: 1.5px;
+
+    &:hover {
+      color: #D88254;
+    }
+
+    @media screen and (max-width: 480px) {
+      padding: 2px 0px !important;
+      font-size: 14px !important;
+      letter-spacing: 0.7px;
+    }
+  }
+
   .hamburger {
     display: flex; /* 플렉스 컨테이너 */
-    justify-content: flex-start; /* 중앙 정렬 */
-    align-items: center;
-    width: 30px; /* 아이콘 크기 조정 */
+    justify-content: flex-end; /* 중앙 정렬 */
+    align-items: flex-end;
+    width: 20px; /* 아이콘 크기 조정 */
     height: 30px;
     padding-top: 5px;
     color: #333;
@@ -37,19 +155,79 @@
       display: none; /* 모바일에서는 기존 버튼 숨김 */
     }
   }
+
+  .language {
+    font-size: 12px;
+
+    @media screen and (max-width: 480px) {
+      font-size: 12px;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .header {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  .nav {
+    padding: 0px 10px !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .nav {
+    padding: 0px 10px !important;
+  }
+
+  .title {
+    font-size: 14px !important;
+  }
+
+  .intro { 
+    width: 48%;
+    
+  }
 }
 
 @media screen and (max-width: 480px) {
   .nav {
-    width: 100%; /* 화면 너비에 맞게 확장 */
-    padding-right: 10px;
+    padding: 3px 0 !important;
+    flex-direction: column;
   }
 
-  .right {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end !important;
+  .intro{
+    width: 100% !important; 
+    font-size: 12px !important;
+    padding: 3px 0px !important;
+  }
+
+  .title {
+    font-size: 14px !important;
+    letter-spacing: 0px !important;
+  }
+
+  .button {
+    width: 12px !important;
+    height: 10px !important;
+  }
+
+  .language {
+    font-size: 12px;
+  }
+
+  .menu {
+    flex-direction: row;
+    justify-content: space-between !important; /* 모바일에서 좌우 양 끝으로 */
+    align-items: flex-start !important;
+    margin: 0;
+    width: 100% !important;
+  }
+
+  .menuButton {
+    padding: 2px 0px !important;
+    font-size: 14px !important;
+    letter-spacing: 0.7px;
   }
 
   /* 커스텀 버튼은 styled-components에서 관리 */
