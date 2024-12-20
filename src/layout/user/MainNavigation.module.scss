@@ -18,6 +18,11 @@
     padding: 0 20px; /* 좌우 패딩 추가 */
   }
 
+  .menuContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .right {
     display: flex;
     align-items: center;
@@ -96,7 +101,7 @@
 
   .intro {
     flex: 0 0 auto; 
-    width: 50%;
+    width: 43%;
     text-align: left;
     font-size: 14px;
     padding: 0 20px;

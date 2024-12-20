@@ -6,14 +6,13 @@ import { faBars, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import CustomHamburgerButton from "./CustomHamburgerButton"; // 커스텀 버튼 임포트
 
-const MainNavigation = ({ drawerOpen, onToggleDrawer }) => {
+const MainNavigation = ({ drawerOpen, onToggleDrawer, language, setLanguage }) => {
   const [openNotice, setOpenNotice] = useState(false);
   const noticeRef = useRef(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
   const [isOpen, setIsOpen] = useState(false);
 
-  // 언어 상태 관리
-  const [language, setLanguage] = useState("한국어");
+  // RootLayout에서 받은 language 사용
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
 
   // 언어 변경에 따른 제목과 소개 텍스트
