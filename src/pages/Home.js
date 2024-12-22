@@ -3,7 +3,8 @@ import React from "react";
 import styled from "styled-components";
 import styles from "../styles/Layout.module.scss";
 import { useOutletContext } from "react-router-dom";
-import IntroduceProject from "./IntroduceProject";
+import CampridgeProject from "./CampridgeProject";
+import DoggleProject from "./DoggleProject";
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -22,8 +23,11 @@ const Home = () => {
       <div className={styles.category}>
         <p>APP</p>
       </div>
-      {/* IntroduceProject를 사용하여 영상+설명 섹션 렌더링 */}
-      <IntroduceProject language={language} />
+      <CampridgeProject language={language} />
+      <div className={styles.category}>
+        <p>WEB</p>
+      </div>
+      <DoggleProject language={language} />
     </ContentWrapper>
   );
 };

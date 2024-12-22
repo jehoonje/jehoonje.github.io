@@ -1,4 +1,4 @@
-// IntroduceProject.jsx
+// CampridgeProject.jsx
 import React from "react";
 import styled from "styled-components";
 import styles from "../styles/Layout.module.scss";
@@ -40,9 +40,28 @@ const DescriptionContainer = styled.div`
   }
 `;
 
-const IntroduceProject = ({ language }) => {
+// --- 추가한 부분 시작 ---
+const TagContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px; /* 필요에 따라 조정 */
+`;
+
+const Tag = styled.span`
+  background-color: #fff;
+  color: #000;
+  padding: 2px 8px;
+  font-size: 14px;
+  border: 1px solid #333;
+  border-radius: 4px;
+`;
+// --- 추가한 부분 끝 ---
+
+const CampridgeProject = ({ language }) => {
   const titleText = language === "English" ? "Campridge" : "캠프릿지";
-  const categoryText = language === "English" ? "Lifestyle / Travel" : "라이프스타일 / 여행";
+  const categoryText =
+    language === "English" ? "Lifestyle / Travel" : "라이프스타일 / 여행";
 
   const descriptionText =
     language === "English"
@@ -80,10 +99,22 @@ const IntroduceProject = ({ language }) => {
           <h2>{titleText}</h2>
           <h3>{categoryText}</h3>
           <p>{descriptionText}</p>
+          
+          <TagContainer>
+            <Tag>ReactNative</Tag>
+            <Tag>HTML/CSS/JS</Tag>
+            <Tag>Java</Tag>
+            <Tag>SpringBoot</Tag>
+            <Tag>JPA</Tag>
+            <Tag>AWS EC2</Tag>
+            <Tag>RDS</Tag>
+            <Tag>Maria DB</Tag>
+          </TagContainer>
+
         </DescriptionContainer>
       </div>
     </div>
   );
 };
 
-export default IntroduceProject;
+export default CampridgeProject;
