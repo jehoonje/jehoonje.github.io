@@ -1,7 +1,9 @@
-// CampridgeProject.jsx
-import React from "react";
+// CampridgeProject.js
+import React, { useState } from "react";
 import styled from "styled-components";
 import styles from "../styles/Layout.module.scss";
+import Modal from "../components/Modal";
+import { GoArrowUpRight } from "react-icons/go";
 
 const VideoContainer = styled.div`
   overflow: hidden;
@@ -9,21 +11,6 @@ const VideoContainer = styled.div`
   display: flex;
   border: 1px solid #333;
   background: rgba(3, 3, 3, 0.5);
-
-  @media (max-width: 1024px) {
-    width: 254px !important;
-    height: auto !important;
-  }
-
-  @media (max-width: 768px) {
-    width: 254px !important;
-    height: auto !important;
-  }
-
-  @media (max-width: 480px) {
-    width: 254px !important;
-    height: auto !important;
-  }
 `;
 
 const StyledVideo = styled.video`
@@ -35,17 +22,18 @@ const StyledVideo = styled.video`
 
 const DescriptionContainer = styled.div`
   max-width: 320px;
-  @media (max-width: 767px) {
-    max-width: 90%;
-  }
 `;
 
-// --- 추가한 부분 시작 ---
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: end;
+`;
+
 const TagContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px; /* 필요에 따라 조정 */
+  gap: 8px;
+  margin-top: 8px;
 `;
 
 const Tag = styled.span`
@@ -56,10 +44,18 @@ const Tag = styled.span`
   border: 1px solid #333;
   border-radius: 4px;
 `;
-// --- 추가한 부분 끝 ---
 
 const CampridgeProject = ({ language }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // 모달 열기
+  const openModal = () => setIsModalOpen(true);
+  // 모달 닫기
+  const closeModal = () => setIsModalOpen(false);
+
   const titleText = language === "English" ? "Campridge" : "캠프릿지";
+  const projectDetails =
+    language === "English" ? "Learn More" : "프로젝트 상세";
   const categoryText =
     language === "English" ? "Lifestyle / Travel" : "라이프스타일 / 여행";
 
@@ -82,38 +78,64 @@ const CampridgeProject = ({ language }) => {
          현재 플레이스토어에 출시를 앞두고 있습니다.`;
 
   return (
-    <div className={styles.mainContainer}>
-      <div className={styles.video}>
-        <VideoContainer>
-          <StyledVideo
-            src="/videos/campridge_video.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-          />
-        </VideoContainer>
+    <>
+      <div className={styles.category}>
+        <p>APP</p>
       </div>
-      <div className={styles.desc}>
-        <DescriptionContainer>
-          <h2>{titleText}</h2>
-          <h3>{categoryText}</h3>
-          <p>{descriptionText}</p>
-          
-          <TagContainer>
-            <Tag>ReactNative</Tag>
-            <Tag>HTML/CSS/JS</Tag>
-            <Tag>Java</Tag>
-            <Tag>SpringBoot</Tag>
-            <Tag>JPA</Tag>
-            <Tag>AWS EC2</Tag>
-            <Tag>RDS</Tag>
-            <Tag>Maria DB</Tag>
-          </TagContainer>
 
-        </DescriptionContainer>
+      {/* 전체 컨테이너는 이제 클릭 이벤트 없음 */}
+      <div className={styles.mainContainer}>
+        <div className={styles.video}>
+          <VideoContainer>
+            <StyledVideo
+              src="/videos/campridge_video.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+            />
+          </VideoContainer>
+        </div>
+
+        <div className={styles.desc}>
+          <DescriptionContainer>
+            <h2>{titleText}</h2>
+            <h3>{categoryText}</h3>
+            <p>{descriptionText}</p>
+
+            <TagContainer
+              style={{
+                marginTop: "25px",
+              }}
+            >
+              <Tag>ReactNative</Tag>
+              <Tag>HTML/CSS/JS</Tag>
+              <Tag>Java</Tag>
+              <Tag>SpringBoot</Tag>
+              <Tag>JPA</Tag>
+              <Tag>AWS EC2</Tag>
+              <Tag>RDS</Tag>
+              <Tag>Maria DB</Tag>
+            </TagContainer>
+
+            <ButtonContainer>
+              <button onClick={openModal}>
+                {projectDetails}
+                <GoArrowUpRight className={styles.icon} />
+              </button>
+            </ButtonContainer>
+          </DescriptionContainer>
+        </div>
+
+        {/* 모달 */}
+        <Modal isOpen={isModalOpen} onClose={closeModal} title={titleText}>
+          <p>
+            여기에 <strong>Campridge</strong> 프로젝트에 관한 더욱 상세한 정보,
+            스크린샷 등이 들어갈 수 있습니다.
+          </p>
+        </Modal>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,4 +1,5 @@
 .mainContainer {
+  padding-bottom: 10%;
   width: 100%;
   height: 100%;
   display: flex;
@@ -42,6 +43,7 @@ h3 {
   // background: #ff0e0e;
   display: flex;
   justify-content: center;
+  font-size: 14px;
   width: 60%;
   height: 100%;
   padding: 25px 0;
@@ -55,9 +57,40 @@ h3 {
     flex-direction: column;
     align-items: center;
   }
+
+  button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-Color: transparent;
+    font-size: 14px;
+    padding: 10px 20px;
+    padding-left: 30px;
+    margin-top: 10%;
+    border: 0.5px solid #555;
+    border-Radius: 30px;
+
+    &:hover {
+      background-color: #fafafa;
+    }
+
+    .icon {
+      margin-left: 5px;
+      font-size: 18px;
+    }
+  }
 }
 
 .category {
-  margin-top: 5%;
-  margin-bottom: 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  font-size: 18px;
+  padding-top: 2%;
+  margin-bottom: 4%;
+  text-indent: 10px;
+  color: #555;
+  width: 100%;
+  border-bottom: 2px solid #f5f5f5;
 }
+
