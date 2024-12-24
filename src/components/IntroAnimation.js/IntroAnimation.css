@@ -1,0 +1,125 @@
+.intro-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  filter: brightness(1.2) brightness(0.8) saturate(0.1);
+  width: 100%;
+  height: 100%;
+  background: var(--c-noir-neutral); /* 인트로 배경색 설정 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* 최상위에 표시 */
+  opacity: 1;
+  transition: opacity 2s ease-out;
+}
+
+.intro-container.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-container main,
+.intro-container article,
+.intro-container svg {
+  --diag: 1.4143;
+  --size: calc(100vmax * var(--diag));
+  position: fixed;
+  top: calc(50vh - var(--size) / 2);
+  left: calc(50vw - var(--size) / 2);
+  width: var(--size);
+  height: var(--size);
+  transform-origin: 50% 50%;
+  will-change: filter, transform, opacity;
+}
+
+@keyframes clockwise {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes fade-to-o {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: var(--o);
+  }
+}
+
+@keyframes bounce-diagonal {
+  from {
+    transform: translate(-100%, -100%);
+  }
+  to {
+    transform: translate(calc(100vmax), calc(100vmax));
+  }
+}
+
+.intro-container main {
+  animation: 13s linear infinite clockwise;
+  filter: blur(10vmax);
+}
+
+.intro-container main::before {
+  --o: 0.4;
+  background-color: var(--c-red-orange);
+  width: 80%;
+  height: 80%;
+  filter: blur(2vmax);
+  animation: 29s ease-in-out infinite alternate fade-to-o;
+}
+
+.intro-container main::after {
+  background-color: var(--c-electric-purple);
+  width: 70%;
+  height: 70%;
+  bottom: 0;
+  right: 0;
+  animation:
+    3s linear infinite reverse clockwise,
+    17s ease-in-out infinite alternate fade-to-o;
+  transform-origin: 60% 60%;
+  filter: blur(4vmax);
+}
+
+.intro-container article {
+  animation: 7s ease-in-out infinite reverse alternate clockwise;
+}
+
+.intro-container article::before {
+  background-color: var(--c-yellow);
+  width: 30%;
+  height: 30%;
+  filter: blur(8vmax);
+  animation: 11s ease-in-out infinite alternate bounce-diagonal;
+  
+}
+
+.intro-container article::after {
+  background-color: var(--c-yellow-20);
+  width: 9%;
+  height: 9%;
+  filter: blur(4vmax);
+  animation: 11s ease-in-out infinite alternate bounce-diagonal, slight-move 18s ease-in-out infinite alternate;
+  mix-blend-mode: color-dodge;
+}
+
+.intro-container svg {
+  animation: 37s linear infinite reverse clockwise, slight-move 20s ease-in-out infinite alternate;
+  mix-blend-mode: color-burn;
+}
+
+
+:root {
+  --c-noir-neutral: #4f5576;
+  --c-red-orange: #f56c16;
+  --c-electric-purple: #b653f5;
+  --c-yellow-20: #fdf7d0;
+  --c-yellow-30: #f9e673;
+  --c-yellow: #f5d616;
+}

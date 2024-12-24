@@ -4,6 +4,7 @@ import styled from "styled-components";
 import styles from "../styles/Layout.module.scss";
 import Modal from "../components/Modal"; // 모달 컴포넌트 import
 import { GoArrowUpRight } from "react-icons/go";
+import SimpleSlider from "../components/SimpleSlider";
 
 const VideoContainer = styled.div`
   position: relative;
@@ -83,7 +84,7 @@ Developed by a team of seven over approximately one month, the project was succe
   return (
     <>
       <div className={styles.category}>
-        <p>APP</p>
+        <p>WEB</p>
       </div>
 
       {/* 기존: 전체 컨테이너에서 onClick 제거 */}
@@ -129,11 +130,39 @@ Developed by a team of seven over approximately one month, the project was succe
         </div>
 
         {/* 모달 */}
-        <Modal isOpen={isModalOpen} onClose={closeModal} title={titleText}>
-          <p>
-            여기에는 <strong>Doggle</strong> 프로젝트에 대한 상세 정보, 스크린샷
-            등이 들어갈 수 있습니다.
-          </p>
+        <Modal isOpen={isModalOpen} onClose={closeModal} title="프로젝트 상세">
+          <div className="slide-container">
+            <SimpleSlider
+              images={[
+                "/images/slide1.png",
+                "/images/slide2.png",
+                "/images/slide3.png",
+              ]}
+            />
+          </div>
+
+          <div className="content-section">
+            <h3 className="section-title">Trouble Shooting</h3>
+            <p>개발 중 발생했던 문제와 해결 과정...</p>
+          </div>
+
+          <div className="content-section">
+            <h3 className="section-title">ERD 구조</h3>
+            <img src="/images/erd.png" alt="ERD" style={{ maxWidth: "100%" }} />
+          </div>
+
+          <div className="content-section">
+            <h3 className="section-title">기능별 기술 사용</h3>
+            <ul>
+              <li>
+                인증: Firebase Auth - 빠르고 안정적인 인증 및 소셜 로그인 지원
+              </li>
+              <li>
+                결제: Toss Payments - 국내 결제 시스템 안정성 및 쉬운 연동
+              </li>
+              {/* 등등 */}
+            </ul>
+          </div>
         </Modal>
       </div>
     </>

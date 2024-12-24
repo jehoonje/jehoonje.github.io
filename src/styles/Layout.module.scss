@@ -15,12 +15,8 @@
 
 p {
   margin: 0;
-}
-
-h3 {
-  color: #cacaca;
-  font-weight: normal;
-  text-align: right;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .video {
@@ -50,6 +46,16 @@ h3 {
 
   h2 {
     margin: 0;
+  }
+
+  p {
+    white-space: normal !important;
+  }
+  
+  h3 {
+    color: #cacaca;
+    font-weight: normal;
+    text-align: right;
   }
 
   @media (max-width: 480px) {
