@@ -1,5 +1,5 @@
 // src/components/Modal.js
-import React, { useState } from "react";
+import React from "react";
 import styled, { keyframes, css } from "styled-components";
 import { IoClose } from "react-icons/io5";
 
