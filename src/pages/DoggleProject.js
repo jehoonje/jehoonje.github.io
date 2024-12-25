@@ -1,11 +1,12 @@
 // DoggleProject.js
+
 import React, { useState } from "react";
 import styled from "styled-components";
 import styles from "../styles/Layout.module.scss";
-import Modal from "../components/Modal"; // 모달 컴포넌트 import
+import Modal from "../components/Modal"; // 모달 컴포넌트
 import { GoArrowUpRight } from "react-icons/go";
-import SimpleSlider from "../components/SimpleSlider";
 
+// === styled-components ===
 const VideoContainer = styled.div`
   position: relative;
   width: 100%;
@@ -52,20 +53,74 @@ const Tag = styled.span`
   border-radius: 4px;
 `;
 
-const DoggleProject = ({ language }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+/**
+ * 탭 전환 버튼 관련 styled-components
+ */
+const ToggleButtonWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin-bottom: 16px;
+`;
 
-  // 모달 열기
+const ToggleButton = styled.button`
+  background-color: ${(props) => (props.active ? "#3e3f4c" : "#ddd")};
+  color: ${(props) => (props.active ? "#fff" : "#000")};
+  border: none;
+  font-size: 20px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  @media (max-width: 600px) {
+    padding: 8px 5px;
+    font-size: 14px;
+  }
+`;
+
+/**
+ * 모달 내부 콘텐츠를 감싸는 styled-component
+ */
+const ModalContent = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-width: 100%;
+    overflow-x: auto;
+    background: #f6f6f6;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: "Courier New", Courier, monospace;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+`;
+
+const DoggleProject = ({ language }) => {
+  // 모달 열림/닫힘, 탭 상태
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("feature");
+
+  // 모달 열기/닫기
   const openModal = () => setIsModalOpen(true);
-  // 모달 닫기
   const closeModal = () => setIsModalOpen(false);
 
+  // === 다국어 대응 ===
   const titleText = language === "English" ? "Doggle" : "도글";
   const projectDetails =
     language === "English" ? "Learn More" : "프로젝트 상세";
   const categoryText =
     language === "English" ? "Lifestyle / Pet" : "라이프스타일 / 반려동물";
 
+  // === 프로젝트 소개 ===
   const descriptionText =
     language === "English"
       ? `Doggle is a comprehensive service platform designed for dog owners.
@@ -77,18 +132,702 @@ Developed by a team of seven over approximately one month, the project was succe
 반려견 정보를 등록하면 맞춤형 간식을 추천받고 패키지 형태로 구매할 수 있으며,
 반려견 전용 호텔 및 유치원 예약 서비스도 제공합니다.
 또한, 유저 간 커뮤니티 기능을 통해 반려견 관련 정보를 공유하고 소통할 수 있습니다.
-이 프로젝트는 7인 팀이 약 한 달간 협업하여 개발했으며,
+이 프로젝트는 7인 팀이 약 한 달간 협업하여 개발했으며, 프론트엔드로 참여해 호텔예약, 결제 및 메인화면, 드로어 외 전체적인 디자인을 맡았습니다. 
 배포까지 완료되었으나 현재는 서비스를 운영하지 않고 있습니다.
       `;
+  // === [탭 콘텐츠 1] 기능 정보(Feature Info) ===
+  const featureContent = (
+    <div>
+      <h2>기능 정보</h2>
+      <p>
+        <b>1) 스탭 기능 (Step Indicator)</b>
+        <br />
+        &nbsp;&nbsp;- 예약 프로세스 상 각 단계를 시각적으로 표현해주는 스탭
+        인디케이터
+        <br />
+        &nbsp;&nbsp;- 유저가 현재 어느 단계에 있는지 직관적으로 파악 가능
+      </p>
+      <p>
+        <b>2) 호텔 랜더링</b>
+        <br />
+        &nbsp;&nbsp;- 리덕스 상태 관리를 통해 스텝 기반 예약 페이지(페이징) 전환
+        <br />
+        &nbsp;&nbsp;- 검색, 호텔 조회, 객실 조회, 예약 페이지 렌더링, 반응형 UI
+        <br />
+        &nbsp;&nbsp;- 카카오 주소 검색 API, 카카오 지도, 카카오페이 결제 연동
+        <br />
+        &nbsp;&nbsp;- framer-motion, 슬릭(slider) 라이브러리를 활용한 UI/UX 향상
+        <br />
+        &nbsp;&nbsp;- 예약 상세조회, 리뷰 조회·작성 기능
+      </p>
+      <p>
+        <b>3) 디자인</b>
+        <br />
+        &nbsp;&nbsp;- 프로젝트 레퍼런스, 피그마(Figma)로 UI/UX 시안 구성
+        <br />
+        &nbsp;&nbsp;- 메인 페이지(배너, 반응형 웹) / 전체적인 색상, 폰트 컨셉
+        <br />
+      </p>
+      <p>
+        <b>4) 카테고리(모션 라이브러리)</b>
+        <br />
+        &nbsp;&nbsp;- 반응형 애니메이션 효과로 UI 향상
+        <br />
+        &nbsp;&nbsp;- 모션 컴포넌트를 통한 자연스러운 화면 전환
+      </p>
+
+      <br />
+      <br />
+      <h3>주요 코드 예시</h3>
+      <p>
+        <b>1) 스탭 기능 (Step Indicator)</b>
+        <br />
+        - 예약 프로세스 상 각 단계를 시각적으로 표현하는 스텝 인디케이터를 구현
+        <br />- 유저가 현재 어느 단계(날짜 선택 → 호텔 목록 → 객실 상세 → 예약
+        요약 → 최종 확인)에 있는지 직관적으로 파악하고 이동
+      </p>
+      <pre>{`jsx
+// StepIndicator.js
+import React from 'react';
+import styles from './StepIndicator.module.scss';
+
+const StepIndicator = ({ step, onStepClick }) => {
+  const stepLabels = ['Dates', 'Properties', 'Rooms', 'Summary', 'Confirm'];
+
+  return (
+    <div className={styles.stepIndicator}>
+      {stepLabels.map((label, idx) => (
+        <React.Fragment key={idx + 1}>
+          {idx > 0 && (
+            <div className={\`\${styles.stepLine} \${step > idx ? styles.active : ''}\`} />
+          )}
+          <div className={styles.stepContainer}>
+            <div
+              className={\`\${styles.stepNumber} \${step >= idx + 1 ? styles.active : ''} \${step > idx + 1 ? styles.completed : ''}\`}
+              onClick={idx < step - 1 ? () => onStepClick(idx + 1) : null}
+              style={{ cursor: idx < step - 1 ? 'pointer' : 'default' }}
+            >
+              {step >= idx + 1 ? idx + 1 : ''}
+            </div>
+            <div className={styles.stepLabel}>{label}</div>
+          </div>
+        </React.Fragment>
+      ))}
+    </div>
+  );
+};
+
+export default StepIndicator;
+`}</pre>
+      <p>
+        위의 <b>StepIndicator</b> 컴포넌트는 현재 스텝을 시각적으로 표시하며,
+        이전 스텝으로의 이동을 가능하게 합니다. 리덕스 상태 관리(`step`)를 통해
+        각 단계별로 화면을 전환합니다.
+      </p>
+
+      <p>
+        <b>2) 호텔 랜더링 & 예약 페이징</b>
+        <br />
+        - **리덕스** 상태 관리를 통해 스텝 기반 예약 프로세스 처리
+        <br />
+        - **검색**(위치) → **호텔 조회**(리스트) → **객실 조회** → **예약
+        페이지** 랜더링(결제, 반응형 UI)
+        <br />- **카카오 주소 검색, 카카오 지도, 카카오페이 연동** 등 다양한 API
+        활용
+      </p>
+      <pre>{`jsx
+// HotelPage.js (일부 발췌)
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchHotels, setStep } from '../../components/store/hotel/HotelPageSlice';
+import StepIndicator from '../../components/hotel/StepIndicator';
+import HotelList from '../../components/hotel/HotelList';
+import HotelSearchForm from '../../components/hotel/HotelSearchForm';
+import RoomDetail from '../../components/hotel/RoomDetail';
+import BookingDetail from '../../components/hotel/BookingDetail';
+import HotelConfirmation from '../../components/hotel/HotelConfirmation';
+import styles from "./HotelPage.module.scss";
+
+const HotelPage = () => {
+  const dispatch = useDispatch();
+  const { hotels, step, loading, error, selectedHotel } = useSelector(state => state.hotelPage);
+
+  // 검색 후 호텔 리스트 로드
+  const handleSearch = (location) => {
+    dispatch(fetchHotels(location));
+  };
+
+  // 스텝 이동 함수
+  const handleNextStep = () => {
+    dispatch(setStep(Math.min(step + 1, 5)));
+    window.scrollTo(0, 0);
+  };
+
+  return (
+    <div className={styles.hotelReservationPage}>
+      <StepIndicator step={step} onStepClick={(num) => dispatch(setStep(num))} />
+      {step === 1 && (
+        <HotelSearchForm onSearch={handleSearch} handleNextStep={handleNextStep} />
+      )}
+      {step === 2 && (
+        <HotelList onShowProperty={(hotelId) => dispatch(setStep(3))} />
+      )}
+      {step === 3 && selectedHotel && (
+        <RoomDetail hotel={selectedHotel} onBook={handleNextStep} getSliderSettings={(count) => ({
+          dots: true,
+          infinite: true,
+          speed: 500,
+          slidesToShow: count < 3 ? count : 3,
+          slidesToScroll: 1,
+        })} />
+      )}
+      {step === 4 && selectedHotel && (
+        <BookingDetail onPay={handleNextStep} />
+      )}
+      {step === 5 && selectedHotel && (
+        <HotelConfirmation
+          hotel={selectedHotel}
+          selectedRoom={useSelector(state => state.hotelPage.selectedRoom)}
+          startDate={useSelector(state => state.reservation.startDate)}
+          endDate={useSelector(state => state.reservation.endDate)}
+          totalPrice={useSelector(state => state.reservation.totalPrice)}
+          user={useSelector(state => state.userEdit.userDetail)}
+        />
+      )}
+    </div>
+  );
+};
+
+export default HotelPage;
+`}</pre>
+      <p>
+        <b>HotelPage</b> 컴포넌트는 예약 프로세스의 각 단계를 관리하며, 단계에
+        따라 적절한 컴포넌트를 렌더링합니다. 리덕스 상태 관리(`step`)를 통해
+        스텝을 전환하며, 각 단계별로 필요한 데이터를 로드하고 표시합니다.
+      </p>
+
+      <p>
+        <b>3) 카카오 API 활용 (주소 검색, 지도, 카카오페이)</b>
+        <br />
+        - 주소를 입력받아 Kakao Map Marker 표시
+        <br />
+        - `MapView` 컴포넌트: `kakao.maps.services.Geocoder()`로 주소→좌표 변환
+        <br />- **카카오페이**는 결제 준비 요청 → **결제창** 리다이렉트 → 성공
+        시 예약 확정
+      </p>
+      <pre>{`jsx
+// MapView.js (일부)
+import React, { useEffect, useState } from 'react';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
+
+const MapView = ({ location, title }) => {
+  const [coords, setCoords] = useState({ lat: 37.506320759000715, lng: 127.05368251210247 });
+  const [map, setMap] = useState(null);
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = \`https://dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY&libraries=services\`;
+    document.head.appendChild(script);
+
+    script.onload = () => {
+      if (window.kakao && window.kakao.maps) {
+        const geocoder = new window.kakao.maps.services.Geocoder();
+
+        geocoder.addressSearch(location, (result, status) => {
+          if (status === window.kakao.maps.services.Status.OK) {
+            const lat = result[0].y;
+            const lng = result[0].x;
+            setCoords({ lat, lng });
+          } else {
+            console.error('Geocode was not successful for the following reason: ' + status);
+            // Fallback: 기본 좌표 설정
+            setCoords({ lat: 37.5063, lng: 127.0536 });
+          }
+        });
+      } else {
+        console.error('Kakao maps library is not loaded');
+        // Fallback: 기본 좌표 설정
+        setCoords({ lat: 37.5063, lng: 127.0536 });
+      }
+    };
+
+    script.onerror = () => {
+      console.error('Kakao Maps script failed to load');
+      // Fallback: 기본 좌표 설정
+      setCoords({ lat: 37.5063, lng: 127.0536 });
+    };
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, [location]);
+
+  const handleZoomIn = () => {
+    if (map) {
+      map.setLevel(map.getLevel() - 1);
+    }
+  };
+
+  const handleZoomOut = () => {
+    if (map) {
+      map.setLevel(map.getLevel() + 1);
+    }
+  };
+
+  let mapContainerStyle = {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+  };
+
+  const mapStyle = {
+    width: '100%',
+    height: '500px',
+    maxWidth: '1400px', // 최대 너비 1400px 설정
+    filter: 'sepia(10%) hue-rotate(0deg) saturate(60%) brightness(100%) contrast(100%)',
+  };
+
+  return (
+    <div style={mapContainerStyle}>
+      <Map
+        center={coords}
+        level={3}
+        style={mapStyle}
+        draggable={false}
+        onCreate={setMap}
+      >
+        <MapMarker position={coords}>
+          <div
+            style={{
+              color: '#9971ff',
+              fontSize: '18px',
+              fontWeight: '700',
+              border: '2px solid #9971ff',
+              borderRadius: '5px',
+              padding: '5px 10px',
+              background: '#ffffff',
+            }}
+          >
+            {title}
+          </div>
+        </MapMarker>
+      </Map>
+      <div style={{ position: 'absolute', top: '10px', right: '550px', zIndex: 10 }}>
+        <button onClick={handleZoomIn} style={buttonStyle}>➕</button>
+        <button onClick={handleZoomOut} style={buttonStyle}>➖</button>
+      </div>
+    </div>
+  );
+};
+
+const buttonStyle = {
+  background: '#FFF',
+  color: '#ffffff',
+  border: 'none',
+  padding: '10px',
+  margin: '5px',
+  fontSize: '25px',
+  borderRadius: '5px',
+  cursor: 'pointer',
+};
+
+export default MapView;
+`}</pre>
+      <p>
+        <b>MapView</b> 컴포넌트는 카카오 지도 API를 활용하여 입력된 주소를
+        기반으로 위치를 표시합니다. 주소를 좌표로 변환하여 마커를 표시하고, 줌
+        인/아웃 기능을 제공합니다.
+      </p>
+
+      <p>
+        <b>4) UI/UX 라이브러리 활용 (framer-motion, react-slick)</b>
+        <br />
+        - **framer-motion**: Drawer, 모달 등 애니메이션 효과 구현
+        <br />- **react-slick**: 호텔 이미지 슬라이더 구현
+      </p>
+      <pre>{`jsx
+// Drawer.js
+import React, { useState, useRef, useEffect } from 'react';
+import styled from 'styled-components';
+import styles from './Drawer.module.scss';
+import { useNavigate } from 'react-router-dom'; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { motion } from "framer-motion";
+import { PulseLoader } from "react-spinners";
+
+import spinnerStyles from "../../layout/user/Spinner.module.scss";
+
+const DrawerContainer = styled(motion.div)
+  font-family: 'NotoSansKR';
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: auto;
+  width: 440px;
+  height: 100%;
+  background-color: #14332C;
+  z-index: 1400;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+
+  @media (max-width: 400px) {
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+;
+
+const CloseButton = styled(motion.button)
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+;
+
+const NavItem = styled.button
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  text-align: left;
+  padding: 10px 0;
+  width: 100%;
+  cursor: pointer;
+  &:hover {
+    color: #ccc;
+  }
+;
+
+const IconContainer = styled.div
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+  a {
+    color: #fff;
+    font-size: 24px;
+    &:hover {
+      color: #ccc;
+    }
+  }
+;
+
+/**
+ * Drawer 컴포넌트
+ */
+const Drawer = ({ open, onClose }) => {
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate
+  const drawerRef = useRef(null);
+
+  const handleNavClick = async (path) => {
+    setLoading(true); // 로딩 시작
+    try {
+      // 비동기 작업 또는 페이지 로딩 처리
+      await new Promise(resolve => setTimeout(resolve, 1000)); // 실제 비동기 작업으로 대체 가능
+      navigate(path); // 페이지 이동
+      setTimeout(() => {
+        onClose(); // 페이지 이동 후 Drawer 닫기
+      }, 300); // navigate 후 약간의 딜레이 후 onClose 호출
+    } finally {
+      setLoading(false); // 로딩 종료
+    }
+  };
+
+  // 바탕화면 클릭 시 Drawer 닫기
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (drawerRef.current && !drawerRef.current.contains(e.target)) {
+        onClose();
+      }
+    };
+
+    if (open) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [open, onClose]);
 
   return (
     <>
+      {loading && (
+        <div className={styles.loadingOverlay}>
+          <div className={spinnerStyles.spinnerContainer}>
+            <PulseLoader
+              className={spinnerStyles.loader}
+              color="#0B593F" 
+              loading={loading}
+              size={18}
+            />{" "}
+          </div>
+        </div>
+      )}
+      <DrawerContainer
+        initial={{ x: '100%' }}  // Drawer가 화면 밖에 시작
+        animate={{ x: open ? 0 : '100%' }}  // 열리고 닫힐 때 위치 변화
+        transition={{
+          type: 'spring',  // inertia 대신 spring 사용
+          stiffness: 180,  // 스프링의 강성도
+          damping: open ? 25 : 35,     // 감쇠 비율
+          mass: 1,         // 질량
+          restDelta: 0.001,  // 애니메이션 종료 조건
+        }}
+        open={open}
+        ref={drawerRef}
+      >
+        {/* 닫기 버튼 */}
+        <CloseButton
+          open={open}
+          onClick={onClose}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        >
+          <div className="x-shape"></div>
+        </CloseButton>
+        {/* 네비게이션 링크 */}
+        <NavItem onClick={() => handleNavClick("/")}>Home</NavItem>
+        <NavItem onClick={() => handleNavClick("/mypage")}>My Page</NavItem>
+        <NavItem onClick={() => handleNavClick("/hotel")}>Hotel</NavItem>
+        <NavItem onClick={() => handleNavClick("/treats")}>Shop</NavItem>
+        <NavItem onClick={() => handleNavClick("/board")}>Community</NavItem>
+        {/* 소셜 아이콘 */}
+        <IconContainer className="navIcons">
+          <a href="mailto:example@example.com" target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faEnvelope} />
+          </a>
+          <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faInstagram} />
+          </a>
+        </IconContainer>
+      </DrawerContainer>
+      {/* Top 및 Bottom Drawer 애니메이션 */}
+      <TopDrawerContainer
+        initial={{ y: '-100%' }}  // 위에서 시작
+        animate={{ y: open ? 0 : '-100%' }}  // 열리고 닫힐 때 위치 변화
+        transition={{
+          type: 'spring',  // inertia 대신 spring 사용
+          stiffness: 180,  // 스프링의 강성도
+          damping: open ? 27 : 33,     // 감쇠 비율
+          mass: 1,         // 질량
+          restDelta: 0.001,  // 애니메이션 종료 조건
+        }}
+        open={open}
+      >
+      </TopDrawerContainer>
+      <BottomDrawerContainer
+        initial={{ y: '100%' }}  // 아래에서 시작
+        animate={{ y: open ? 0 : '100%' }}  // 열리고 닫힐 때 위치 변화
+        transition={{
+          type: 'spring',  // inertia 대신 spring 사용
+          stiffness: 180,  // 스프링의 강성도
+          damping: open ? 27 : 33,      // 감쇠 비율
+          mass: 1,         // 질량
+          restDelta: 0.001,  // 애니메이션 종료 조건
+        }}
+        open={open}
+      >
+      </BottomDrawerContainer>
+    </>
+  );
+};
+
+export default Drawer;
+`}</pre>
+      <p>
+        <b>Drawer</b> 컴포넌트는 **framer-motion**을 활용하여 애니메이션 효과를
+        구현하였습니다. Drawer가 열리고 닫힐 때 자연스러운 스프링 애니메이션을
+        적용하여 사용자 경험을 향상시킵니다. 또한, **react-slick**이나
+        **Swiper**와 함께 사용하여 슬라이더 효과를 적용할 수 있습니다.
+      </p>
+
+      <p>
+        <b>5) 예약 상세조회, 리뷰 조회 랜더링</b>
+        <br />
+        - 예약 목록 페이지 → 예약 상세 페이지에서 **리뷰** 확인 및 작성
+        <br />- **ReviewList** 컴포넌트에서 리뷰 등록/수정/삭제 기능 구현
+      </p>
+      <pre>{`jsx
+// ReviewList.js
+import React, { useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchReviewsByHotelId } from '../store/hotel/HotelReviewSlice';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Pagination, Navigation } from 'swiper/modules';
+import styles from './ReviewList.module.scss';
+import { FaStar } from 'react-icons/fa';
+
+const renderStars = (rate) => {
+    return Array(rate)
+        .fill()
+        .map((_, index) => (
+            <FaStar key={index} className={styles.starIcon} />
+        ));
+};
+
+const sliderSettings = {
+    slidesPerView: 2,
+    slidesPerGroup: 2,
+    spaceBetween: 20,
+    pagination: false,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+    },
+    speed: 500,
+    loop: true,
+    modules: [Pagination, Navigation],
+    breakpoints: {
+        400: {
+            slidesPerView: 1,
+            slidesPerGroup: 1,
+            spaceBetween:10,
+            loop: true,
+        },
+    },
+};
+
+const ReviewList = ({ hotelId }) => {
+    const dispatch = useDispatch();
+    const { loading, error, reviewsByHotelId } = useSelector((state) => state.reviews);
+    const reviews = reviewsByHotelId[hotelId] || []; // 현재 호텔의 리뷰 가져오기
+
+    useEffect(() => {
+        if (hotelId) {
+            dispatch(fetchReviewsByHotelId(hotelId));
+        }
+    }, [dispatch, hotelId]);
+
+    const sortedReviews = useMemo(() => {
+        return reviews.length > 0 ? [...reviews].sort((a, b) => new Date(b.reviewDate) - new Date(a.reviewDate)) : [];
+    }, [reviews]);
+
+    if (loading) {
+        return <p className={styles.reviewLoading}>Loading reviews...</p>;
+    }
+
+    if (error) {
+        return <p className={styles.reviewLoading}>Error loading reviews: {error.message}</p>;
+    }
+
+    if (reviews.length === 0) {
+        return <p className={styles.reviewLoading}>리뷰가 없습니다!</p>;
+    }
+
+    return (
+        <div className={styles.reviewList}>
+            <Swiper {...sliderSettings}>
+                {sortedReviews.map((review) => (
+                    <SwiperSlide key={review.id} className={styles.review}>
+                        <p className={styles.reviewContent}>{review.reviewContent}</p>
+                        <div className={styles.reviewDetails}>
+                            <p className={styles.reviewRate}>Rating: {renderStars(review.rate)}</p>
+                            <p className={styles.reviewDate}>Date: {new Date(review.reviewDate).toLocaleDateString()}</p>
+                            <p className={styles.reviewUser}>User: {review.nickName}</p>
+                        </div>
+                    </SwiperSlide>
+                ))}
+                <div className={\`swiper-button-prev \${styles.swiperButtonPrev}\`}></div>
+                <div className={\`swiper-button-next \${styles.swiperButtonNext}\`}></div>
+            </Swiper>
+        </div>
+    );
+};
+
+export default ReviewList;
+`}</pre>
+      <p>
+        <b>ReviewList</b> 컴포넌트는 **Swiper**를 활용하여 리뷰를 슬라이더
+        형태로 표시합니다. **react-redux**를 통해 리뷰 데이터를 관리하며,
+        **FaStar** 아이콘을 사용하여 평점을 시각적으로 표현합니다.
+      </p>
+
+      <p>
+        <b>6) 프로젝트 메인 페이지 랜더링 / 디자인 / 배너</b>
+        <br />
+        - 홈(메인) 화면에서 **Swiper**로 배너 / 광고 / 이벤트 표시
+        <br />- **Drawer**(햄버거 메뉴) 사용하여 화면 전환 시 자연스러운 모션
+      </p>
+      <pre>{`jsx
+// DoggleProject.js (Drawer 사용 예시)
+import Drawer from '../../components/Drawer';
+
+const DoggleProject = ({ language }) => {
+  // ... 기존 상태 및 함수
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
+
+  return (
+    <>
+      {/* ... 기존 코드 */}
+      <button onClick={toggleDrawer} className={styles.drawerToggle}>
+        메뉴 열기
+      </button>
+      <Drawer open={isDrawerOpen} onClose={toggleDrawer} />
+      {/* ... 기존 코드 */}
+    </>
+  );
+};
+
+export default DoggleProject;
+`}</pre>
+      <p>
+        <b>Drawer</b> 컴포넌트는 **framer-motion**을 활용하여 애니메이션 효과를
+        구현하였습니다. Drawer가 열리고 닫힐 때 자연스러운 스프링 애니메이션을
+        적용하여 사용자 경험을 향상시킵니다. 또한, **react-slick**이나
+        **Swiper**와 함께 사용하여 슬라이더 효과를 적용할 수 있습니다.
+      </p>
+    </div>
+  );
+
+  // === [탭 콘텐츠 2] 아키 텍쳐(Architecture) ===
+  const architectureContent = (
+    <div>
+      <h2>아키 텍쳐</h2>
+      <img src="/images/architecture.png" alt="Doggle Architecture" />
+    </div>
+  );
+
+  // === [탭 콘텐츠 3] ERD Diagram ===
+  const erdContent = (
+    <div>
+      <h2>ERD그램</h2>
+      <p>프로젝트 전체의 데이터베이스 구조 입니다.</p>
+      <img src="/images/erd_dog.png" alt="Doggle ERD" />
+      <p>실제 DB에서는 MySQL(MariaDB) + JPA 사용</p>
+    </div>
+  );
+
+  return (
+    <>
+      {/* 카테고리 표시 */}
       <div className={styles.category}>
         <p>WEB</p>
       </div>
 
-      {/* 기존: 전체 컨테이너에서 onClick 제거 */}
       <div className={styles.mainContainer}>
+        {/* 프로젝트 대표 영상/이미지 */}
         <div className={styles.video}>
           <VideoContainer>
             <StyledVideo
@@ -100,24 +839,23 @@ Developed by a team of seven over approximately one month, the project was succe
             />
           </VideoContainer>
         </div>
+
+        {/* 소개/설명 박스 */}
         <div className={styles.desc}>
           <DescriptionContainer>
             <h2>{titleText}</h2>
             <h3>{categoryText}</h3>
             <p>{descriptionText}</p>
-
-            <TagContainer
-              style={{
-                marginTop: "25px",
-              }}
-            >
+            <TagContainer style={{ marginTop: "25px" }}>
               <Tag>React</Tag>
-              <Tag>HTML/CSS/JS</Tag>
+              <Tag>Redux</Tag>
+              <Tag>Html/Sass/JS</Tag>
               <Tag>Java</Tag>
               <Tag>SpringBoot</Tag>
-              <Tag>JPA</Tag>
+              <Tag>MySQL</Tag>
               <Tag>AWS EC2</Tag>
-              <Tag>Maria DB</Tag>
+              <Tag>카카오 API</Tag>
+              {/* 필요에 따라 태그(사용 기술) 추가 */}
             </TagContainer>
 
             <ButtonContainer>
@@ -129,40 +867,38 @@ Developed by a team of seven over approximately one month, the project was succe
           </DescriptionContainer>
         </div>
 
-        {/* 모달 */}
+        {/* 탭형식 모달 */}
         <Modal isOpen={isModalOpen} onClose={closeModal} title="프로젝트 상세">
-          <div className="slide-container">
-            <SimpleSlider
-              images={[
-                "/images/slide1.png",
-                "/images/slide2.png",
-                "/images/slide3.png",
-              ]}
-            />
-          </div>
+          <ModalContent>
+            {/* 탭 전환 버튼 */}
+            <ToggleButtonWrapper>
+              <ToggleButton
+                active={activeTab === "feature"}
+                onClick={() => setActiveTab("feature")}
+              >
+                기능 정보
+              </ToggleButton>
 
-          <div className="content-section">
-            <h3 className="section-title">Trouble Shooting</h3>
-            <p>개발 중 발생했던 문제와 해결 과정...</p>
-          </div>
+              <ToggleButton
+                active={activeTab === "architecture"}
+                onClick={() => setActiveTab("architecture")}
+              >
+                아키 텍쳐
+              </ToggleButton>
 
-          <div className="content-section">
-            <h3 className="section-title">ERD 구조</h3>
-            <img src="/images/erd.png" alt="ERD" style={{ maxWidth: "100%" }} />
-          </div>
+              <ToggleButton
+                active={activeTab === "erd"}
+                onClick={() => setActiveTab("erd")}
+              >
+                ERD 다이어그램
+              </ToggleButton>
+            </ToggleButtonWrapper>
 
-          <div className="content-section">
-            <h3 className="section-title">기능별 기술 사용</h3>
-            <ul>
-              <li>
-                인증: Firebase Auth - 빠르고 안정적인 인증 및 소셜 로그인 지원
-              </li>
-              <li>
-                결제: Toss Payments - 국내 결제 시스템 안정성 및 쉬운 연동
-              </li>
-              {/* 등등 */}
-            </ul>
-          </div>
+            {/* 탭 내용 분기 렌더링 */}
+            {activeTab === "feature" && featureContent}
+            {activeTab === "architecture" && architectureContent}
+            {activeTab === "erd" && erdContent}
+          </ModalContent>
         </Modal>
       </div>
     </>
