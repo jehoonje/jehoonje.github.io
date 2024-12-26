@@ -20,7 +20,7 @@ const MainNavigation = ({ drawerOpen, onToggleDrawer, language, setLanguage }) =
   const introText =
     language === "English"
       ? "I am a developer who helps businesses grow through web and app development. I focus on creating simple."
-      : "웹과 앱을 통해 비즈니스의 성장을 돕는 개발자입니다. 심플하면서도 최적의 사용자 경험과 성능을 추구하며 사용자들의 문제 해결에 집중합니다.";
+      : "웹과 앱으로 의미 있는 변화를 이끄는 개발자입니다. 미니멀하면서도 효과적인 솔루션을 제안하며, 사용자와 팀 모두가 만족할 수 있는 결과를 만듭니다.";
 
   useEffect(() => {
     const handleResize = () => {

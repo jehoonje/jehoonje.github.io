@@ -36,7 +36,7 @@ const ModalContainer = styled.div`
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 800px;
-  max-height: 90vh; /* 세로 최대 높이 */
+  max-height: 80vh; /* 세로 최대 높이 */
   overflow-y: auto; /* 내용이 길어질 경우 스크롤 */
   background-color: #fff;
   border-radius: 8px;
@@ -50,16 +50,16 @@ const ModalContainer = styled.div`
 
 const ModalHeader = styled.div`
   position: relative;
-  padding: 16px;
+  padding: 10px;
   background-color: #333;
   color: #fff;
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top:8px;
+  right: 8px;
   background: none;
   border: none;
   color: #fff;
