@@ -9,6 +9,7 @@ import { GoArrowUpRight } from "react-icons/go";
 // === styled-components ===
 const VideoContainer = styled.div`
   position: relative;
+  bottom: 50px;
   width: 100%;
   padding-top: 60%;
   overflow: hidden;
@@ -16,6 +17,10 @@ const VideoContainer = styled.div`
   display: flex;
   border: 1px solid #333;
   background: rgba(3, 3, 3, 0.5);
+  @media (max-width : 480px) {
+    bottom: 0px !important;
+    top: 20px;
+  }
 `;
 
 const StyledVideo = styled.video`
@@ -132,7 +137,7 @@ Developed by a team of seven over approximately one month, the project was succe
 반려견 정보를 등록하면 맞춤형 간식을 추천받고 패키지 형태로 구매할 수 있으며,
 반려견 전용 호텔 및 유치원 예약 서비스도 제공합니다.
 또한, 유저 간 커뮤니티 기능을 통해 반려견 관련 정보를 공유하고 소통할 수 있습니다.
-이 프로젝트는 7인 팀이 약 한 달간 협업하여 개발했으며, 프론트엔드로 참여해 호텔예약, 결제 및 메인화면, 드로어 외 전체적인 디자인을 맡았습니다. 
+이 프로젝트는 7인 팀이 약 한 달간 협업하여 개발했으며, 프론트엔드로 참여해 호텔예약, 결제 및 메인화면, 드로어 외 전체적인 디자인을 맡았습니다. 
 배포까지 완료되었으나 현재는 서비스를 운영하지 않고 있습니다.
       `;
   // === [탭 콘텐츠 1] 기능 정보(Feature Info) ===
@@ -876,21 +881,32 @@ export default DoggleProject;
                 active={activeTab === "feature"}
                 onClick={() => setActiveTab("feature")}
               >
-                기능 정보
+                {language === "English" ? "Feature Info" : "기능 정보"}
               </ToggleButton>
 
               <ToggleButton
                 active={activeTab === "architecture"}
                 onClick={() => setActiveTab("architecture")}
               >
-                아키 텍쳐
+                {language === "English" ? "Architecture" : "아키 텍쳐"}
               </ToggleButton>
 
               <ToggleButton
                 active={activeTab === "erd"}
                 onClick={() => setActiveTab("erd")}
               >
-                ERD 다이어그램
+                ERD
+              </ToggleButton>
+
+              <ToggleButton>
+                <a
+                  href="https://github.com/full-stack-final-project-team3"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: "none", color: "inherit" }} // 스타일 조정 가능
+                >
+                  {language === "English" ? "Repository" : "레포지토리"}
+                </a>
               </ToggleButton>
             </ToggleButtonWrapper>
 
