@@ -1,0 +1,41 @@
+/* src/styles/About.module.scss */ 
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 가로 방향 가운데 정렬 */
+  justify-content: center; /* 세로 방향 가운데 정렬 (필요 시) */
+  padding: 20px;
+  padding-top: 10px;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+
+.profileImage {
+  width: 30%; /* 이미지 크기 조정 */
+  height: auto;
+  object-fit: cover;
+  margin: 30px 0;  
+  margin-bottom: 40px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  @media screen and (max-width: 480px) {
+    width: 90%; /* 모바일 화면에서 이미지 크기 조정 */
+    
+  }
+}
+
+.description {
+  font-size: 1.1rem;
+  text-align: left;
+  white-space: pre-line;
+  color: #333;
+  max-width: 580px;
+  margin-bottom: 40px;
+  margin-left: 10px;
+  line-height: 1.6;
+  @media screen and (max-width: 480px) {
+    margin-left: 0;
+    
+  }
+}

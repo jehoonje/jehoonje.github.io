@@ -69,7 +69,7 @@ const MainNavigation = ({
 
   useEffect(() => {
     // 처음엔 .headerInitial 상태 -> 약간의 지연 후 .headerSlideDown
-    const timer = setTimeout(() => setSlideDown(true), 8000);
+    const timer = setTimeout(() => setSlideDown(true), 1500);
     return () => clearTimeout(timer);
   }, []);
 
