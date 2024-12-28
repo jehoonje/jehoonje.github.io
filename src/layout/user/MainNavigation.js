@@ -1,12 +1,11 @@
 // MainNavigation.jsx
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./MainNavigation.module.scss";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import CustomHamburgerButton from "./CustomHamburgerButton"; // 커스텀 버튼 임포트
-import HeaderTextContext from "../../context/HeaderTextContext"; // Context 임포트
 
 const MainNavigation = ({
   drawerOpen,
@@ -24,7 +23,7 @@ const MainNavigation = ({
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
 
   const [slideDown, setSlideDown] = useState(false);
-  
+
   // 여기서는 showIntro를 직접 알 수 없으니,
   // Home -> RootLayout -> MainNavigation 으로 "showIntro"를 props로 내려줘도 되고
   // Redux/Context를 통해 전역 상태로 관리할 수도 있습니다.

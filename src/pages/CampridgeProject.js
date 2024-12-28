@@ -1289,6 +1289,7 @@ protected void doFilterInternal(HttpServletRequest request,
     <>
       <div className={styles.category} onClick={handleCategoryClick}>
         <p>APP</p>
+        <button>Click</button>
       </div>
 
       <div className={styles.mainContainerWrapper} ref={mainContainerRef}>
