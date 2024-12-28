@@ -16,6 +16,7 @@
     justify-content: space-between; /* 데스크탑에서 space-between 적용 */
     align-items: center; /* 수직 중앙 정렬 */
     padding: 0 20px; /* 좌우 패딩 추가 */
+    margin-top: 3px;
   }
 
   .menuContainer {
@@ -115,14 +116,13 @@
   }
 
   .menu {
-    display: flex;
-    padding-top: 1px !important;
+    display: flex; 
+    margin-top: 3px;
 
     @media screen and (max-width: 480px) {
       flex-direction: row;
       justify-content: space-between !important; /* 모바일에서 좌우 양 끝으로 */
       align-items: center !important;
-      margin: 0;
       width: 100% !important;
     }
   }
@@ -198,8 +198,11 @@
 }
 
 @media screen and (max-width: 480px) {
+  .header {
+    padding: 3px 0px !important;
+  }
   .nav {
-    padding: 3px 0 !important;
+    padding: 0 !important;
     flex-direction: column;
   }
 
@@ -238,4 +241,19 @@
   }
 
   /* 커스텀 버튼은 styled-components에서 관리 */
+}
+
+/* === [추가 부분] === */
+/* 
+  첫 렌더링 시 header가 화면 위에서 아래로 슬라이드되는 애니메이션을 정의.
+  transform: translateY(-100%)에서 0%로 이동
+*/
+.headerInitial {
+  transform: translateY(-100%);    /* 화면 윗부분 밖으로 위치 */
+  transition: transform 0.8s ease-in-out;
+}
+
+.headerSlideDown {
+  transform: translateY(0);       /* 원래 위치로 슬라이드 다운 */
+  transition: transform 0.8s ease-in-out;
 }

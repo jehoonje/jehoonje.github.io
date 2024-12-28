@@ -1,6 +1,6 @@
 // DoggleProject.js
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import styles from "../styles/Layout.module.scss";
 import Modal from "../components/Modal"; // 모달 컴포넌트
@@ -17,7 +17,7 @@ const VideoContainer = styled.div`
   display: flex;
   border: 1px solid #333;
   background: rgba(3, 3, 3, 0.5);
-  @media (max-width : 480px) {
+  @media (max-width: 480px) {
     bottom: 0px !important;
     top: 20px;
   }
@@ -114,6 +114,10 @@ const DoggleProject = ({ language }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("feature");
 
+  // "카테고리" 영역 토글 상태 추가
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const mainContainerRef = useRef(null);
+
   // 모달 열기/닫기
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -140,6 +144,25 @@ Developed by a team of seven over approximately one month, the project was succe
 이 프로젝트는 7인 팀이 약 한 달간 협업하여 개발했으며, 프론트엔드로 참여해 호텔예약, 결제 및 메인화면, 드로어 외 전체적인 디자인을 맡았습니다. 
 배포까지 완료되었으나 현재는 서비스를 운영하지 않고 있습니다.
       `;
+
+  // 카테고리 div 클릭 시 열고 닫기 토글
+  const handleCategoryClick = () => {
+    setIsCategoryOpen((prev) => !prev);
+  };
+
+  // useEffect를 사용하여 isCategoryOpen 상태에 따라 maxHeight를 설정
+  useEffect(() => {
+    if (mainContainerRef.current) {
+      if (isCategoryOpen) {
+        mainContainerRef.current.style.maxHeight = `${mainContainerRef.current.scrollHeight}px`;
+        mainContainerRef.current.style.opacity = "1";
+      } else {
+        mainContainerRef.current.style.maxHeight = "0px";
+        mainContainerRef.current.style.opacity = "0";
+      }
+    }
+  }, [isCategoryOpen]);
+
   // === [탭 콘텐츠 1] 기능 정보(Feature Info) ===
   const featureContent = (
     <div>
@@ -827,95 +850,101 @@ export default DoggleProject;
   return (
     <>
       {/* 카테고리 표시 */}
-      <div className={styles.category}>
+      <div className={styles.category} onClick={handleCategoryClick}>
         <p>WEB</p>
       </div>
 
-      <div className={styles.mainContainer}>
-        {/* 프로젝트 대표 영상/이미지 */}
-        <div className={styles.video}>
-          <VideoContainer>
-            <StyledVideo
-              src="/videos/doggle_video.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-            />
-          </VideoContainer>
-        </div>
+      <div className={styles.mainContainerWrapper} ref={mainContainerRef}>
+        <div className={styles.mainContainer}>
+          {/* 프로젝트 대표 영상/이미지 */}
+          <div className={styles.video}>
+            <VideoContainer>
+              <StyledVideo
+                src="/videos/doggle_video.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+            </VideoContainer>
+          </div>
 
-        {/* 소개/설명 박스 */}
-        <div className={styles.desc}>
-          <DescriptionContainer>
-            <h2>{titleText}</h2>
-            <h3>{categoryText}</h3>
-            <p>{descriptionText}</p>
-            <TagContainer style={{ marginTop: "25px" }}>
-              <Tag>React</Tag>
-              <Tag>Redux</Tag>
-              <Tag>Html/Sass/JS</Tag>
-              <Tag>Java</Tag>
-              <Tag>SpringBoot</Tag>
-              <Tag>MySQL</Tag>
-              <Tag>AWS EC2</Tag>
-              <Tag>카카오 API</Tag>
-              {/* 필요에 따라 태그(사용 기술) 추가 */}
-            </TagContainer>
+          {/* 소개/설명 박스 */}
+          <div className={styles.desc}>
+            <DescriptionContainer>
+              <h2>{titleText}</h2>
+              <h3>{categoryText}</h3>
+              <p>{descriptionText}</p>
+              <TagContainer style={{ marginTop: "25px" }}>
+                <Tag>React</Tag>
+                <Tag>Redux</Tag>
+                <Tag>Html/Sass/JS</Tag>
+                <Tag>Java</Tag>
+                <Tag>SpringBoot</Tag>
+                <Tag>MySQL</Tag>
+                <Tag>AWS EC2</Tag>
+                <Tag>카카오 API</Tag>
+                {/* 필요에 따라 태그(사용 기술) 추가 */}
+              </TagContainer>
 
-            <ButtonContainer>
-              <button onClick={openModal}>
-                {projectDetails}
-                <GoArrowUpRight className={styles.icon} />
-              </button>
-            </ButtonContainer>
-          </DescriptionContainer>
-        </div>
+              <ButtonContainer>
+                <button onClick={openModal}>
+                  {projectDetails}
+                  <GoArrowUpRight className={styles.icon} />
+                </button>
+              </ButtonContainer>
+            </DescriptionContainer>
+          </div>
 
-        {/* 탭형식 모달 */}
-        <Modal isOpen={isModalOpen} onClose={closeModal} title="프로젝트 상세">
-          <ModalContent>
-            {/* 탭 전환 버튼 */}
-            <ToggleButtonWrapper>
-              <ToggleButton
-                active={activeTab === "feature"}
-                onClick={() => setActiveTab("feature")}
-              >
-                {language === "English" ? "Feature Info" : "기능 정보"}
-              </ToggleButton>
-
-              <ToggleButton
-                active={activeTab === "architecture"}
-                onClick={() => setActiveTab("architecture")}
-              >
-                {language === "English" ? "Architecture" : "아키 텍쳐"}
-              </ToggleButton>
-
-              <ToggleButton
-                active={activeTab === "erd"}
-                onClick={() => setActiveTab("erd")}
-              >
-                ERD
-              </ToggleButton>
-
-              <ToggleButton>
-                <a
-                  href="https://github.com/full-stack-final-project-team3"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ textDecoration: "none", color: "inherit" }} // 스타일 조정 가능
+          {/* 탭형식 모달 */}
+          <Modal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            title="프로젝트 상세"
+          >
+            <ModalContent>
+              {/* 탭 전환 버튼 */}
+              <ToggleButtonWrapper>
+                <ToggleButton
+                  active={activeTab === "feature"}
+                  onClick={() => setActiveTab("feature")}
                 >
-                  {language === "English" ? "Repository" : "레포지토리"}
-                </a>
-              </ToggleButton>
-            </ToggleButtonWrapper>
+                  {language === "English" ? "Feature Info" : "기능 정보"}
+                </ToggleButton>
 
-            {/* 탭 내용 분기 렌더링 */}
-            {activeTab === "feature" && featureContent}
-            {activeTab === "architecture" && architectureContent}
-            {activeTab === "erd" && erdContent}
-          </ModalContent>
-        </Modal>
+                <ToggleButton
+                  active={activeTab === "architecture"}
+                  onClick={() => setActiveTab("architecture")}
+                >
+                  {language === "English" ? "Architecture" : "아키 텍쳐"}
+                </ToggleButton>
+
+                <ToggleButton
+                  active={activeTab === "erd"}
+                  onClick={() => setActiveTab("erd")}
+                >
+                  ERD
+                </ToggleButton>
+
+                <ToggleButton>
+                  <a
+                    href="https://github.com/full-stack-final-project-team3"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: "none", color: "inherit" }} // 스타일 조정 가능
+                  >
+                    {language === "English" ? "Repository" : "레포지토리"}
+                  </a>
+                </ToggleButton>
+              </ToggleButtonWrapper>
+
+              {/* 탭 내용 분기 렌더링 */}
+              {activeTab === "feature" && featureContent}
+              {activeTab === "architecture" && architectureContent}
+              {activeTab === "erd" && erdContent}
+            </ModalContent>
+          </Modal>
+        </div>
       </div>
     </>
   );

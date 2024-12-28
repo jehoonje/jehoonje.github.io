@@ -1,5 +1,5 @@
 // src/pages/CampridgeProject.js
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import styles from "../styles/Layout.module.scss";
 import Modal from "../components/Modal";
@@ -37,9 +37,7 @@ const VideoContainer = styled.div`
   border: 1px solid #333;
   background: rgba(3, 3, 3, 0.5);
   position: relative; /* 스켈레톤 위치를 위한 상대 위치 설정 */
-  `;
-
- 
+`;
 
 const StyledVideo = styled.video`
   width: 284px;
@@ -144,8 +142,6 @@ const ZoomableImage = ({ src, alt }) => {
     setIsZoomed(false);
   };
 
-  
-
   return (
     <>
       <ZoomableImageContainer onClick={handleImageClick}>
@@ -205,6 +201,9 @@ const CampridgeProject = ({ language }) => {
   // 영상 로딩 상태 추가
   const [isVideoLoading, setIsVideoLoading] = useState(true);
 
+  // "카테고리" 영역 토글 상태 추가
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const mainContainerRef = useRef(null);
 
   // 모달 열기/닫기
   const openModal = () => setIsModalOpen(true);
@@ -235,6 +234,24 @@ const CampridgeProject = ({ language }) => {
          따라서 이에 따라 유저들은 가입을 통해 계정을 개설 할 수 있습니다.
          제작기간 2024년 10월 ~ 12월 까지 약 3개월 소요 되었습니다.
          현재 플레이스토어에 출시를 앞두고 있습니다.`;
+
+  // 카테고리 div 클릭 시 열고 닫기 토글
+  const handleCategoryClick = () => {
+    setIsCategoryOpen((prev) => !prev);
+  };
+
+  // useEffect를 사용하여 isCategoryOpen 상태에 따라 maxHeight를 설정
+  useEffect(() => {
+    if (mainContainerRef.current) {
+      if (isCategoryOpen) {
+        mainContainerRef.current.style.maxHeight = `${mainContainerRef.current.scrollHeight}px`;
+        mainContainerRef.current.style.opacity = "1";
+      } else {
+        mainContainerRef.current.style.maxHeight = "0px";
+        mainContainerRef.current.style.opacity = "0";
+      }
+    }
+  }, [isCategoryOpen]);
 
   // === 탭(모달) 콘텐츠: 기능 정보(Feature) ===
   const featureContent =
@@ -1270,111 +1287,113 @@ protected void doFilterInternal(HttpServletRequest request,
 
   return (
     <>
-      <div className={styles.category}>
+      <div className={styles.category} onClick={handleCategoryClick}>
         <p>APP</p>
       </div>
 
-      <div className={styles.mainContainer}>
-        <div className={styles.video} style={{ position: "relative"}}>
-          <VideoContainer>
-            {/* 스켈레톤 표시 */}
-            {isVideoLoading && <VideoSkeleton />}
+      <div className={styles.mainContainerWrapper} ref={mainContainerRef}>
+        <div className={styles.mainContainer}>
+          <div className={styles.video} style={{ position: "relative" }}>
+            <VideoContainer>
+              {/* 스켈레톤 표시 */}
+              {isVideoLoading && <VideoSkeleton />}
 
-            <StyledVideo
-              src="/videos/campridge_video.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              onLoadedData={() => setIsVideoLoading(false)} // 영상 로드 완료 시 상태 업데이트
-              style={{ display: isVideoLoading ? "none" : "block" }} // 로딩 중이면 영상 숨김
-            />
-          </VideoContainer>
-        </div>
+              <StyledVideo
+                src="/videos/campridge_video.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                onLoadedData={() => setIsVideoLoading(false)} // 영상 로드 완료 시 상태 업데이트
+                style={{ display: isVideoLoading ? "none" : "block" }} // 로딩 중이면 영상 숨김
+              />
+            </VideoContainer>
+          </div>
 
-        <div className={styles.desc}>
-          <DescriptionContainer>
-            <h2>{titleText}</h2>
-            <h3>{categoryText}</h3>
-            <p>{descriptionText}</p>
+          <div className={styles.desc}>
+            <DescriptionContainer>
+              <h2>{titleText}</h2>
+              <h3>{categoryText}</h3>
+              <p>{descriptionText}</p>
 
-            <TagContainer style={{ marginTop: "25px" }}>
-              <Tag>ReactNative</Tag>
-              <Tag>HTML/CSS/JS</Tag>
-              <Tag>Java</Tag>
-              <Tag>SpringBoot</Tag>
-              <Tag>JPA</Tag>
-              <Tag>AWS EC2</Tag>
-              <Tag>RDS</Tag>
-              <Tag>Maria DB</Tag>
-            </TagContainer>
+              <TagContainer style={{ marginTop: "25px" }}>
+                <Tag>ReactNative</Tag>
+                <Tag>HTML/CSS/JS</Tag>
+                <Tag>Java</Tag>
+                <Tag>SpringBoot</Tag>
+                <Tag>JPA</Tag>
+                <Tag>AWS EC2</Tag>
+                <Tag>RDS</Tag>
+                <Tag>Maria DB</Tag>
+              </TagContainer>
 
-            <ButtonContainer>
-              <button onClick={openModal}>
-                {projectDetails}
-                <GoArrowUpRight className={styles.icon} />
-              </button>
-            </ButtonContainer>
-          </DescriptionContainer>
-        </div>
+              <ButtonContainer>
+                <button onClick={openModal}>
+                  {projectDetails}
+                  <GoArrowUpRight className={styles.icon} />
+                </button>
+              </ButtonContainer>
+            </DescriptionContainer>
+          </div>
 
-        {/* 모달 */}
-        <Modal
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          title={language === "English" ? "Project Details" : "프로젝트 상세"}
-        >
-          {/* 모달 콘텐츠를 ModalContent로 감싸서 스타일 적용 */}
-          <ModalContent>
-            {/* 탭 전환 버튼 (4개) */}
-            <ToggleButtonWrapper>
-              <ToggleButton
-                active={activeTab === "feature"}
-                onClick={() => setActiveTab("feature")}
-              >
-                {language === "English" ? "Feature Info" : "기능 정보"}
-              </ToggleButton>
-
-              <ToggleButton
-                active={activeTab === "troubleshoot"}
-                onClick={() => setActiveTab("troubleshoot")}
-              >
-                {language === "English" ? "Troubleshooting" : "트러블슈팅"}
-              </ToggleButton>
-
-              <ToggleButton
-                active={activeTab === "flowchart"}
-                onClick={() => setActiveTab("flowchart")}
-              >
-                {language === "English" ? "Flowchart" : "기능 흐름"}
-              </ToggleButton>
-
-              <ToggleButton
-                active={activeTab === "erd"}
-                onClick={() => setActiveTab("erd")}
-              >
-                ERD
-              </ToggleButton>
-
-              <ToggleButton>
-                <a
-                  href="https://github.com/jehoonje/campers"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ textDecoration: "none", color: "inherit" }} // 스타일 조정 가능
+          {/* 모달 */}
+          <Modal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            title={language === "English" ? "Project Details" : "프로젝트 상세"}
+          >
+            {/* 모달 콘텐츠를 ModalContent로 감싸서 스타일 적용 */}
+            <ModalContent>
+              {/* 탭 전환 버튼 (4개) */}
+              <ToggleButtonWrapper>
+                <ToggleButton
+                  active={activeTab === "feature"}
+                  onClick={() => setActiveTab("feature")}
                 >
-                  {language === "English" ? "Repository" : "레포지토리"}
-                </a>
-              </ToggleButton>
-            </ToggleButtonWrapper>
+                  {language === "English" ? "Feature Info" : "기능 정보"}
+                </ToggleButton>
 
-            {/* 탭 내용 분기 렌더링 */}
-            {activeTab === "feature" && featureContent}
-            {activeTab === "troubleshoot" && troubleshootContent}
-            {activeTab === "flowchart" && flowchartContent}
-            {activeTab === "erd" && erdContent}
-          </ModalContent>
-        </Modal>
+                <ToggleButton
+                  active={activeTab === "troubleshoot"}
+                  onClick={() => setActiveTab("troubleshoot")}
+                >
+                  {language === "English" ? "Troubleshooting" : "트러블슈팅"}
+                </ToggleButton>
+
+                <ToggleButton
+                  active={activeTab === "flowchart"}
+                  onClick={() => setActiveTab("flowchart")}
+                >
+                  {language === "English" ? "Flowchart" : "기능 흐름"}
+                </ToggleButton>
+
+                <ToggleButton
+                  active={activeTab === "erd"}
+                  onClick={() => setActiveTab("erd")}
+                >
+                  ERD
+                </ToggleButton>
+
+                <ToggleButton>
+                  <a
+                    href="https://github.com/jehoonje/campers"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: "none", color: "inherit" }} // 스타일 조정 가능
+                  >
+                    {language === "English" ? "Repository" : "레포지토리"}
+                  </a>
+                </ToggleButton>
+              </ToggleButtonWrapper>
+
+              {/* 탭 내용 분기 렌더링 */}
+              {activeTab === "feature" && featureContent}
+              {activeTab === "troubleshoot" && troubleshootContent}
+              {activeTab === "flowchart" && flowchartContent}
+              {activeTab === "erd" && erdContent}
+            </ModalContent>
+          </Modal>
+        </div>
       </div>
     </>
   );

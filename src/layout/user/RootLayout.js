@@ -4,7 +4,7 @@ import MainNavigation from "./MainNavigation";
 import { Outlet } from "react-router-dom";
 import Drawer from "./Drawer";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { motion, LayoutGroup } from "framer-motion";
 import useIsMobile from "./useIsMobile.js";
 
 // Define breakpoints for responsiveness
@@ -25,9 +25,9 @@ const Container = styled(motion.div).withConfig({
   transform-origin: center center;
   height: ${(props) => (props.fullHeight ? "100vh" : "auto")}; /* 변경된 부분 */
   padding: 0;
+  margin: 0 auto;
   width: 92%; /* 기본 너비 설정 */
   max-width: 1200px; /* 최대 너비 제한 */
-  margin: 0 auto; /* 중앙 정렬 */
 
   @media (max-width: ${breakpoints.desktop}) {
     height: ${(props) => (props.fullHeight ? "100vh" : "auto")};
@@ -46,10 +46,10 @@ const Container = styled(motion.div).withConfig({
   }
 
   @media (max-width: ${breakpoints.mobile}) {
-    padding: 0 0.5rem;
+    padding: 0;
     border: none; /* 모바일에서는 border 제거 */
-    width: 92%; /* 모바일에서는 전체 너비 사용 */
-    margin-top: 3px !important;
+    width: 95%; /* 모바일에서는 전체 너비 사용 */
+    margin-top: 0px !important;
   }
 `;
 
@@ -62,13 +62,14 @@ const MainContent = styled.main`
   }
 
   @media (max-width: ${breakpoints.mobile}) {
-    padding: 1rem;
+    padding: 0rem;
   }
 `;
 
 const RootLayout = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [fullHeight, setFullHeight] = useState(false);
+  const [navVisible, setNavVisible] = useState(false);
   const isMobile = useIsMobile(); // Use the custom hook
 
   // 여기서 언어 상태 관리
@@ -118,22 +119,30 @@ const RootLayout = () => {
 
   return (
     <>
-      <Container
-        fullHeight={fullHeight}
-        initial="closed"
-        animate={isMobile ? "closed" : drawerOpen ? "open" : "closed"}
-        variants={variants}
-      >
-        <MainNavigation
-          drawerOpen={drawerOpen}
-          onToggleDrawer={toggleDrawerHandler}
-          language={language}
-          setLanguage={setLanguage}
-        />
-        <MainContent>
-          <Outlet context={{ language }} />
-        </MainContent>
-      </Container>
+      <LayoutGroup>
+        <Container
+          fullHeight={fullHeight}
+          initial="closed"
+          animate={isMobile ? "closed" : drawerOpen ? "open" : "closed"}
+          variants={variants}
+        >
+          {/* Navigation에 navVisible, setNavVisible 넘겨주지 않아도 되지만, 
+            Home에서도 넘겨줄 수 있도록 이 예시에서는 Home에만 줄 예정 */}
+          <MainNavigation
+            drawerOpen={drawerOpen}
+            onToggleDrawer={toggleDrawerHandler}
+            language={language}
+            setLanguage={setLanguage}
+            // 헤더에서는 navVisible 값만 사용해도 되고,
+            // 혹은 Home에게만 넘겨도 됨
+            navVisible={navVisible}
+          />
+          <MainContent>
+            {/* Outlet에 navVisible, setNavVisible 전달 */}
+            <Outlet context={{ language, navVisible, setNavVisible }} />
+          </MainContent>
+        </Container>
+      </LayoutGroup>
       <Drawer open={drawerOpen} onClose={toggleDrawerHandler} />
     </>
   );

@@ -1,90 +1,20 @@
-body {
+/* src/index.css (or src/styles/global.css) */
+html, body {
   margin: 0;
-  font-family:  'Poppins';
-  /*-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',*/
-  /*  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',*/
-  /*  sans-serif;*/
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #fff;
+  /* padding: 0; */
+  box-sizing: border-box;
+  /* 스크롤바 제거(원한다면) */
+  overflow-y: scroll; 
+  scrollbar-width: none; /* 파이어폭스 전용 */
 }
-
 
 body::-webkit-scrollbar {
-    display: none;
-    /*   스크롤바 없앰   */
+  display: none; /* 크롬 등 webkit 브라우저 스크롤바 숨김 */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-/* Poppins */
-
-@font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
-
-  @font-face {
-    font-family: "Noto Sans KR";
-    src: url(../fonts/Noto_Sans_KR/static/NotoSansKR-Regular.ttf) format("opentype");
-    font-style: normal;
-}
-  @font-face {
-    font-family: "Noto Sans KR";
-    src: url(../fonts/Noto_Sans_KR/static/NotoSansKR-Regular.ttf) format("opentype");
-    font-style: Bold;
-}
-  @font-face {
-    font-family: "Pretendard";
-    src: url(../fonts/Pretendard/public/static/Pretendard-Regular.otf) format("opentype");
-    font-style: Bold;
-}
-
-
-@font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 800;
-    unicode-range: U+0030-0039,U+0041-005A,U+0061-007A
-}
-@font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 600;
-    unicode-range: U+0030-0039,U+0041-005A,U+0061-007A
-}
-
-
-@font-face {
-    font-family: 'D2Coding';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/D2Coding.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'UhBeeZZIBA-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/UhBeeZZIBA-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-
-@font-face {
-    font-family: 'LeferiPoint-WhiteObliqueA';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Arita-dotum-Medium';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-dotum-Medium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+/* 모든 엘리먼트에 box-sizing 상속 */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }

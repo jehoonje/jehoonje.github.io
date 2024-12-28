@@ -1,21 +1,27 @@
-// src/pages/Contact.js
-import React from 'react';
-import styled from 'styled-components';
+// src/pages/Home.js
+import React from "react";
+import styled from "styled-components";
+import { useOutletContext } from "react-router-dom";
+import CampridgeProject from "./CampridgeProject";
+import DoggleProject from "./DoggleProject";
 
-const ContactContainer = styled.div`
-  padding-top: 60px; /* 헤더 높이만큼 패딩 추가 */
-  text-align: center;
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 3%;
+  padding: 0px 20px;
 `;
 
-function Contact() {
+const Contact = () => {
+  const { language } = useOutletContext();
+
   return (
-    <>
-      <ContactContainer>
-        <h1>Contact Page</h1>
-        {/* 추가적인 Contact 페이지 내용 */}
-      </ContactContainer>
-    </>
+    <ContentWrapper>
+      <CampridgeProject language={language} />
+      <DoggleProject language={language} />
+    </ContentWrapper>
   );
-}
+};
 
 export default Contact;
