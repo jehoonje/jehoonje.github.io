@@ -24,15 +24,7 @@ const MainNavigation = ({
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
 
   const [slideDown, setSlideDown] = useState(false);
-
-  const { showHeaderText } = useContext(HeaderTextContext); // Context에서 showHeaderText 가져오기
-
-  // 헤더에서의 introText (최종 위치, 폰트 사이즈 14px)
-  const headerIntroText =
-    language === "English"
-      ? "I am a developer who helps businesses grow through web and app development. I focus on creating simple."
-      : "웹과 앱으로 의미 있는 변화를 이끄는 개발자입니다. 미니멀하면서도 효과적인 솔루션을 제안하며, 사용자와 팀 모두가 만족할 수 있는 결과를 만듭니다.";
-
+  
   // 여기서는 showIntro를 직접 알 수 없으니,
   // Home -> RootLayout -> MainNavigation 으로 "showIntro"를 props로 내려줘도 되고
   // Redux/Context를 통해 전역 상태로 관리할 수도 있습니다.

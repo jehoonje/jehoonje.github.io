@@ -1,12 +1,6 @@
 // src/pages/MainIntro.js
 import React from "react";
-import styled from "styled-components";
 import styles from "../styles/MainIntro.module.scss"
-
-const introContainer = styled.div`
-  text-align: center;
-`;
-
 
 function MainIntro({ language }) {
   const introText =

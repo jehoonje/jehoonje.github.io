@@ -7,7 +7,6 @@ import MainIntro from "./MainIntro";
 import CampridgeProject from "./CampridgeProject";
 import DoggleProject from "./DoggleProject";
 import MainTitle from "./MainTitle";
-import HeaderTextContext from "../context/HeaderTextContext";
 
 // 공통 페이드 인/아웃 스타일
 const fadeTransition = css`
@@ -47,7 +46,7 @@ const HomeContainer = styled.div`
 `;
 
 const Home = () => {
-  const { language, navVisible, setNavVisible } = useOutletContext();
+  const { language, setNavVisible } = useOutletContext();
   
 
   // 처음에는 인트로(showIntro)를 보여준다.
