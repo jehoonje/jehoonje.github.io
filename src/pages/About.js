@@ -1,63 +1,41 @@
-// MinimalFlipExample.js
-import React from "react";
-import styled from "styled-components";
-
-const FlipContainer = styled.div`
-  width: 400px;         /* 원하는 크기로 조정 */
-  height: 250px;        /* 원하는 크기로 조정 */
-  perspective: 1000px;  /* 3D 공간을 만드는 관찰자 거리 */
-`;
-
-const FlipCard = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d; /* 3D 보존 */
-  transition: transform 0.8s ease; /* 회전 애니메이션 시간/함수 */
-
-  /* hover 시 Y축 방향으로 180도 회전 */
-  &:hover {
-    transform: rotateY(180deg);
-  }
-`;
-
-const CardFace = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden; /* 뒤집혔을 때 숨기기 */
-  top: 0;
-  left: 0;
-  display: flex;       /* 내용 정렬용 */
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-`;
-
-const CardFront = styled(CardFace)`
-  background-color: #fff; /* front 배경색 */
-`;
-
-const CardBack = styled(CardFace)`
-  background-color: #fafafa; /* back 배경색 */
-  transform: rotateY(180deg);
-`;
+// src/components/About.jsx
+import React from 'react';
+import styles from '../styles/About.module.scss'; 
+import { useOutletContext } from 'react-router-dom';
 
 const About = () => {
-  return (
-    <FlipContainer>
-      <FlipCard>
-        {/* ------- FRONT ------- */}
-        <CardFront>
-          FRONT (여기에 video 넣기)
-        </CardFront>
+  // RootLayout (혹은 부모 컴포넌트)에서 전달받은 language
+  const { language } = useOutletContext();
 
-        {/* ------- BACK -------- */}
-        <CardBack>
-          BACK (여기에 desc 넣기)
-        </CardBack>
-      </FlipCard>
-    </FlipContainer>
+  // 한국어 자기소개
+  const descriptionKr = `안녕하세요. 웹과 앱으로 의미 있는 변화를 발견하는 개발자 임제훈 입니다. 
+
+연극 대학을 중퇴한 뒤, 7년간 국내외 호스피탈리티 업계에서 근무하고, 미래를 위한 변화를 만들기 위해 노력하며, 이제는 개발자로서 나아가기 위해 노력하고 있습니다.
+
+  다양한 환경에서의 경험을 바탕으로 사용자 중심의 서비스를 만들기 위해 노력하고 있습니다. 미니멀하면서도 효과적인 솔루션을 제안하며, 사용자와 팀 모두가 만족할 수 있는 결과를 만듭니다. 감사합니다.`;
+
+  // 영어 자기소개
+  const descriptionEn = `Hello! I'm Jehoon Lim, a developer who discovers meaningful changes through web and app development.
+
+After leaving my Theater Arts major, I spent seven years working in the Korean and international hospitality industry, striving to shape a better future. Now, I'm committed to growing every day as a developer.
+
+Drawing from my diverse experiences, I focus on creating user-centric services. I also propose minimal yet effective solutions, delivering outcomes that satisfy both users and the team. 
+
+Thank you.`;
+
+  // language 값에 따라 보여줄 텍스트 결정
+  const description = language === 'English' ? descriptionEn : descriptionKr;
+
+  return (
+    <div className={styles.container}>
+      <img
+        src="/images/profile.jpeg" 
+        alt="Profile"
+        className={styles.profileImage}
+      />
+      {/* 줄바꿈 처리를 위해 CSS에서 white-space: pre-line; 등을 적용해 주세요. */}
+      <p className={styles.description}>{description}</p>
+    </div>
   );
 };
 

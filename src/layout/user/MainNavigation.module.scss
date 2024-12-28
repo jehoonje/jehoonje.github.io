@@ -101,19 +101,19 @@
     }
   }
 
-  .intro {
-    flex: 0 0 auto; 
-    width: 43%;
-    text-align: left;
-    font-size: 14px;
-    padding: 0 20px;
+  // .intro {
+  //   flex: 0 0 auto; 
+  //   width: 43%;
+  //   text-align: left;
+  //   font-size: 14px;
+  //   padding: 0 20px;
 
-    @media screen and (max-width: 480px) {
-      width: 100% !important; 
-      font-size: 12px !important;
-      padding: 3px 0px !important;
-    }
-  }
+  //   @media screen and (max-width: 480px) {
+  //     width: 100% !important; 
+  //     font-size: 12px !important;
+  //     padding: 3px 0px !important;
+  //   }
+  // }
 
   .menu {
     display: flex; 

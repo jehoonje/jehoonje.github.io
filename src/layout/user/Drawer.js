@@ -7,12 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
   faUser,
-  faPhone,
-  faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import { PulseLoader } from "react-spinners";
-
 import spinnerStyles from "../../layout/user/Spinner.module.scss";
 
 // Define breakpoints for responsiveness
@@ -178,96 +175,96 @@ const LeftDrawerContainer = styled(motion.div)`
   }
 `;
 
-const CloseButton = styled(motion.button)`
-  position: absolute;
-  top: 20%;
-  left: -5%;
-  width: 90px;
-  height: 90px;
-  background-color: #333;
-  border: 5px solid #333;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 1700;
-  opacity: ${(props) => (props.open ? 1 : 0)};
-  visibility: ${(props) => (props.open ? "visible" : "hidden")};
-  transition: opacity ${(props) => (props.open ? "1.0s ease-in-out" : "0s")},
-    visibility 0s ${(props) => (props.open ? "0s" : "1.0s")};
-  animation: ${(props) => (props.open ? "rotateIn 0.8s ease-in-out" : "none")};
+// const CloseButton = styled(motion.button)`
+//   position: absolute;
+//   top: 20%;
+//   left: -5%;
+//   width: 90px;
+//   height: 90px;
+//   background-color: #333;
+//   border: 5px solid #333;
+//   border-top-right-radius: 30px;
+//   border-bottom-right-radius: 30px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   cursor: pointer;
+//   z-index: 1700;
+//   opacity: ${(props) => (props.open ? 1 : 0)};
+//   visibility: ${(props) => (props.open ? "visible" : "hidden")};
+//   transition: opacity ${(props) => (props.open ? "1.0s ease-in-out" : "0s")},
+//     visibility 0s ${(props) => (props.open ? "0s" : "1.0s")};
+//   animation: ${(props) => (props.open ? "rotateIn 0.8s ease-in-out" : "none")};
 
-  box-sizing: border-box; /* 추가: 패딩 및 보더를 포함하여 크기 계산 */
+//   box-sizing: border-box; /* 추가: 패딩 및 보더를 포함하여 크기 계산 */
 
-  .x-shape {
-    width: 60%;
-    height: 60%;
-    position: relative;
-    z-index: 1600;
-  }
+//   .x-shape {
+//     width: 60%;
+//     height: 60%;
+//     position: relative;
+//     z-index: 1600;
+//   }
 
-  .x-shape::before,
-  .x-shape::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 5px;
-    background-color: #fff;
-    top: 50%;
-    left: 50%;
-    transform-origin: center;
-    transition: width 0.3s ease-in-out;
-  }
+//   .x-shape::before,
+//   .x-shape::after {
+//     content: "";
+//     position: absolute;
+//     width: 0;
+//     height: 5px;
+//     background-color: #fff;
+//     top: 50%;
+//     left: 50%;
+//     transform-origin: center;
+//     transition: width 0.3s ease-in-out;
+//   }
 
-  .x-shape::before {
-    transform: translate(-50%, -50%) rotate(45deg);
-    animation: drawXBefore 0.3s ease-in-out forwards;
-    animation-delay: 0.3s;
-    z-index: 1700;
-  }
+//   .x-shape::before {
+//     transform: translate(-50%, -50%) rotate(45deg);
+//     animation: drawXBefore 0.3s ease-in-out forwards;
+//     animation-delay: 0.3s;
+//     z-index: 1700;
+//   }
 
-  .x-shape::after {
-    transform: translate(-50%, -50%) rotate(-45deg);
-    animation: drawXAfter 0.3s ease-in-out 0.15s forwards;
-    animation-delay: 0.3s;
-    z-index: 1700;
-  }
+//   .x-shape::after {
+//     transform: translate(-50%, -50%) rotate(-45deg);
+//     animation: drawXAfter 0.3s ease-in-out 0.15s forwards;
+//     animation-delay: 0.3s;
+//     z-index: 1700;
+//   }
 
-  @keyframes drawXBefore {
-    from {
-      width: 0;
-    }
-    to {
-      width: 100%;
-    }
-  }
+//   @keyframes drawXBefore {
+//     from {
+//       width: 0;
+//     }
+//     to {
+//       width: 100%;
+//     }
+//   }
 
-  @keyframes drawXAfter {
-    from {
-      width: 0;
-    }
-    to {
-      width: 100%;
-    }
-  }
+//   @keyframes drawXAfter {
+//     from {
+//       width: 0;
+//     }
+//     to {
+//       width: 100%;
+//     }
+//   }
 
-  @keyframes rotateIn {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
+//   @keyframes rotateIn {
+//     from {
+//       transform: rotate(0deg);
+//     }
+//     to {
+//       transform: rotate(360deg);
+//     }
+//   }
 
-  @media (max-width: ${breakpoints.tablet}) {
-    width: 50px;
-    height: 50px;
-    left: -10px;
-  }
-`;
+//   @media (max-width: ${breakpoints.tablet}) {
+//     width: 50px;
+//     height: 50px;
+//     left: -10px;
+//   }
+// `;
 
 const Drawer = ({ open, onClose }) => {
   const [loading, setLoading] = useState(false);
@@ -276,6 +273,20 @@ const Drawer = ({ open, onClose }) => {
   const drawerRefRight = useRef(null);
   const drawerRefLeft = useRef(null);
 
+  // 아이템(이미지와 링크) 배열
+  const navItems = [
+    {
+      image: "../../../public/images/main.png", // 또는 "/images/main.png"
+      path: "/",
+      label: "Home",
+    },
+    {
+      image: "../../../public/images/about.png", // 또는 "/images/about.png"
+      path: "/about",
+      label: "About Me",
+    },
+  ];
+  
   const handleNavClick = async (path) => {
     // 페이지 이동
     await navigate(path);
@@ -377,8 +388,6 @@ const Drawer = ({ open, onClose }) => {
         {[
           { icon: faHome, path: "/", label: "Home" },
           { icon: faUser, path: "/about", label: "About Me" },
-          { icon: faPhone, path: "/contact", label: "Contact" },
-          { icon: faEnvelope, href: "mailto:limjhoon8@gmail.com", label: "Email" },
         ].map((item, index) => (
           <NavItem
             key={index}

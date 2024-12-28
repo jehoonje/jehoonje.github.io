@@ -11,7 +11,7 @@ import MainTitle from "./MainTitle";
 // 공통 페이드 인/아웃 스타일
 const fadeTransition = css`
   opacity: ${(props) => (props.show ? 1 : 0)};
-  transition: opacity 10s ease-in-out;
+  transition: opacity 2s ease-in-out;
   pointer-events: ${(props) => (props.show ? "auto" : "none")};
 `;
 
@@ -22,7 +22,7 @@ const IntroWrapper = styled.div`
   text-align: center;
   justify-content: center;
   position: absolute; /* 프로젝트 위에 겹치도록 */
-  top: 0;
+  top: -10px;
   left: 0;
   height: 100%;
   background: white; /* 배경색을 설정하여 프로젝트를 가리지 않게 조정 가능 */
@@ -64,7 +64,7 @@ const Home = () => {
       timerIdRef.current = null; // 타이머 ID 초기화
     };
 
-    timerIdRef.current = setTimeout(hideIntro, 100);
+    timerIdRef.current = setTimeout(hideIntro, 500);
 
     // 사용자 이벤트 발생 시 1초 후에 인트로를 페이드 아웃
     const handleUserEvent = () => {
@@ -101,8 +101,7 @@ const Home = () => {
           <IntroWrapper show={showIntro}>
             <motion.div
               initial={false}
-              animate={{ opacity: 0 }}
-              exit={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
               transition={{ layout: { duration: 0.2 } }}
             >
               <MainIntro language={language} />
@@ -112,7 +111,11 @@ const Home = () => {
       </AnimatePresence>
 
       {/* 페이드아웃된 후(즉 showIntro=false) 프로젝트 노출 */}
-        <MainIntro language={language} />
+        <MainIntro 
+        styles={{
+          marginTop: "40px !important",
+        }} 
+        language={language} />
       <ProjectsWrapper show={!showIntro}>
         <MainTitle language={language} />
         <CampridgeProject language={language} />
