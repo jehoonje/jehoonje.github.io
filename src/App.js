@@ -4,7 +4,7 @@ import { router } from "./config/user/route-config";
 import './App.css'; // CSS 파일 임포트
 
 const App = () => {
-  const [fadeIn, setFadeIn] = useState(false);
+  const [fadeIn, setFadeIn] = useState(true);
 
   useEffect(() => {
     // 컴포넌트가 마운트된 후에 fade-in 클래스 추가

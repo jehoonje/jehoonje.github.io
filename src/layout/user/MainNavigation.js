@@ -12,7 +12,6 @@ const MainNavigation = ({
   onToggleDrawer,
   language,
   setLanguage,
-  navVisible,
 }) => {
   const [openNotice, setOpenNotice] = useState(false);
   const noticeRef = useRef(null);
@@ -70,14 +69,9 @@ const MainNavigation = ({
 
   useEffect(() => {
     // 처음엔 .headerInitial 상태 -> 약간의 지연 후 .headerSlideDown
-    const timer = setTimeout(() => setSlideDown(true), 100);
+    const timer = setTimeout(() => setSlideDown(true), 8000);
     return () => clearTimeout(timer);
   }, []);
-
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-    onToggleDrawer();
-  };
 
   const handleLanguageToggle = () => {
     setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
@@ -98,7 +92,7 @@ const MainNavigation = ({
         <motion.div className={styles.menu}>
           <div className={styles.right}>
             {isMobile ? (
-              <CustomHamburgerButton open={isOpen} onClick={handleToggle} />
+              <CustomHamburgerButton open={drawerOpen} onClick={onToggleDrawer} />
             ) : (
               <StyledHamburgerButton
                 className={`${styles.icon} ${styles.hamburger}`}

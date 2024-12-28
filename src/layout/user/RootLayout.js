@@ -69,7 +69,6 @@ const MainContent = styled.main`
 const RootLayout = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [fullHeight, setFullHeight] = useState(false);
-  const [navVisible, setNavVisible] = useState(false);
   const isMobile = useIsMobile(); // Use the custom hook
 
   // 여기서 언어 상태 관리
@@ -126,20 +125,14 @@ const RootLayout = () => {
           animate={isMobile ? "closed" : drawerOpen ? "open" : "closed"}
           variants={variants}
         >
-          {/* Navigation에 navVisible, setNavVisible 넘겨주지 않아도 되지만, 
-            Home에서도 넘겨줄 수 있도록 이 예시에서는 Home에만 줄 예정 */}
           <MainNavigation
             drawerOpen={drawerOpen}
             onToggleDrawer={toggleDrawerHandler}
             language={language}
             setLanguage={setLanguage}
-            // 헤더에서는 navVisible 값만 사용해도 되고,
-            // 혹은 Home에게만 넘겨도 됨
-            navVisible={navVisible}
           />
           <MainContent>
-            {/* Outlet에 navVisible, setNavVisible 전달 */}
-            <Outlet context={{ language, navVisible, setNavVisible }} />
+            <Outlet context={{ language }} />
           </MainContent>
         </Container>
       </LayoutGroup>

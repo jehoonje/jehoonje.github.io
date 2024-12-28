@@ -849,10 +849,17 @@ export default DoggleProject;
 
   return (
     <>
-      {/* 카테고리 표시 */}
-      <div className={styles.category} onClick={handleCategoryClick}>
-        <p>WEB</p>
+      <div
+      className={`${styles.category} ${isCategoryOpen ? styles.categoryOpen : ""}`}
+      onClick={handleCategoryClick}
+    >
+      <p>WEB</p>
+      <div
+        className={styles.clickContainer} // 추가: 스타일 적용을 위한 클래스
+      >
+        <p>Click</p>
       </div>
+    </div>
 
       <div className={styles.mainContainerWrapper} ref={mainContainerRef}>
         <div className={styles.mainContainer}>

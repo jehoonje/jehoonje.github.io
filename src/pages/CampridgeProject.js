@@ -4,6 +4,7 @@ import styled from "styled-components";
 import styles from "../styles/Layout.module.scss";
 import Modal from "../components/Modal";
 import { GoArrowUpRight } from "react-icons/go";
+import { TbHandClick } from "react-icons/tb";
 
 // 스켈레톤 스타일 정의
 const VideoSkeleton = styled.div`
@@ -1287,10 +1288,17 @@ protected void doFilterInternal(HttpServletRequest request,
 
   return (
     <>
-      <div className={styles.category} onClick={handleCategoryClick}>
-        <p>APP</p>
-        <button>Click</button>
+      <div
+      className={`${styles.category} ${isCategoryOpen ? styles.categoryOpen : ""}`}
+      onClick={handleCategoryClick}
+    >
+      <p>APP</p>
+      <div
+        className={styles.clickContainer} // 추가: 스타일 적용을 위한 클래스
+      >
+        <p>Click</p>
       </div>
+    </div>
 
       <div className={styles.mainContainerWrapper} ref={mainContainerRef}>
         <div className={styles.mainContainer}>

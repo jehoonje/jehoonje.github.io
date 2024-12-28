@@ -74,13 +74,9 @@ const NavItem = styled(motion.a)`
     margin: 5px 0;
   }
 
-  @media (max-width: ${breakpoints.mobile}) {
-    font-size: 35px;
-    margin-left: 40px;
-
-    a {
-      font-size: 35px;
-    }
+  @media (max-width: ${breakpoints.mobile}) {  
+    display: flex;
+    justify-content: center;
   }
 `;
 
@@ -106,7 +102,7 @@ const iconVariants = {
 
 // 바운스 호버 애니메이션 제거 및 슬라이드 호버 애니메이션 정의
 const slideHover = {
-  x: -20, // 왼쪽으로 20px 이동
+  x: 20, // 왼쪽으로 20px 이동
   transition: {
     type: 'spring',
     stiffness: 300,
@@ -158,8 +154,10 @@ const BottomDrawerContainer = styled(motion.div)`
 
 const LeftDrawerContainer = styled(motion.div)`
   position: fixed;
+  justify-content: center;
+      align-items: center !important;
   top: 0;
-  left: 0;
+  left: 30px;
   bottom: 0;
   width: 66px;
   background-color: #none;
@@ -176,7 +174,7 @@ const LeftDrawerContainer = styled(motion.div)`
   }
 
   @media (max-width: ${breakpoints.mobile}) {
-    display: none;
+    
   }
 `;
 
@@ -279,19 +277,14 @@ const Drawer = ({ open, onClose }) => {
   const drawerRefLeft = useRef(null);
 
   const handleNavClick = async (path) => {
-    setLoading(true); // 로딩 시작
-    try {
-      // 비동기 작업 또는 페이지 로딩 처리
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // 실제 비동기 작업으로 대체 가능
-      navigate(path); // 페이지 이동
-      setTimeout(() => {
-        onClose(); // 페이지 이동 후 Drawer 닫기
-      }, 300); // navigate 후 약간의 딜레이 후 onClose 호출
-    } finally {
-      setLoading(false); // 로딩 종료
-    }
+    // 페이지 이동
+    await navigate(path);
+    // 0.3초 후 Drawer 닫고, 햄버거 아이콘을 false로 (onClose 내부에서 toggleDrawerHandler가 불리겠죠)
+    setTimeout(() => {
+      onClose(); // => toggleDrawerHandler => setDrawerOpen(false) => 햄버거 open도 false
+    }, 300);
   };
-  // 바탕화면 클릭 useRef, effect 사용하면 될듯?
+
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -343,37 +336,6 @@ const Drawer = ({ open, onClose }) => {
         open={open}
         ref={drawerRef}
       >
-        {[
-          { icon: faHome, path: "/", label: "Home" },
-          { icon: faUser, path: "/about", label: "About Me" },
-          { icon: faPhone, path: "/contact", label: "Contact" },
-          { icon: faEnvelope, href: "mailto:limjhoon8@gmail.com", label: "Email" },
-        ].map((item, index) => (
-          <NavItem
-            key={index}
-            custom={index}
-            initial="hidden"
-            animate={open ? "visible" : "hidden"}
-            variants={iconVariants}
-            onClick={() => item.path ? handleNavClick(item.path) : null}
-            aria-label={item.label}
-            href={item.href || "#"}
-            target={item.href ? "_blank" : "_self"}
-            rel={item.href ? "noopener noreferrer" : ""}
-            whileHover={slideHover}
-          >
-            <FontAwesomeIcon icon={item.icon} />
-          </NavItem>
-        ))}
-        {/* <NavItem>
-          <a
-            href="https://www.instagram.com/jehoon2001"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FontAwesomeIcon icon={faInstagram} />
-          </a>
-        </NavItem> */}
       </DrawerContainer>
       <TopDrawerContainer
         initial={{ y: "-100%" }} // 위에서 시작
@@ -412,7 +374,29 @@ const Drawer = ({ open, onClose }) => {
         open={open}
         ref={drawerRef}
       >
-        <CloseButton
+        {[
+          { icon: faHome, path: "/", label: "Home" },
+          { icon: faUser, path: "/about", label: "About Me" },
+          { icon: faPhone, path: "/contact", label: "Contact" },
+          { icon: faEnvelope, href: "mailto:limjhoon8@gmail.com", label: "Email" },
+        ].map((item, index) => (
+          <NavItem
+            key={index}
+            custom={index}
+            initial="hidden"
+            animate={open ? "visible" : "hidden"}
+            variants={iconVariants}
+            onClick={() => item.path && handleNavClick(item.path)}
+            aria-label={item.label}
+            href={item.href || "#"}
+            target={item.href ? "_blank" : "_self"}
+            rel={item.href ? "noopener noreferrer" : ""}
+            whileHover={slideHover}
+          >
+            <FontAwesomeIcon icon={item.icon} />
+          </NavItem>
+        ))}
+        {/* <CloseButton
           open={open}
           onClick={onClose}
           whileHover={{ scale: 1.2 }}
@@ -420,7 +404,7 @@ const Drawer = ({ open, onClose }) => {
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
           <div className="x-shape"></div>
-        </CloseButton>
+        </CloseButton> */}
       </LeftDrawerContainer>
     </>
   );

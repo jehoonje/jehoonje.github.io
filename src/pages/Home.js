@@ -11,15 +11,15 @@ import MainTitle from "./MainTitle";
 // 공통 페이드 인/아웃 스타일
 const fadeTransition = css`
   opacity: ${(props) => (props.show ? 1 : 0)};
-  transition: opacity 0.8s ease-in-out;
-  pointer-events: ${(props) => (props.show ? 'auto' : 'none')};
+  transition: opacity 10s ease-in-out;
+  pointer-events: ${(props) => (props.show ? "auto" : "none")};
 `;
 
 // MainIntro를 감싸는 래퍼 (절대 위치로 프로젝트 위에 표시)
 const IntroWrapper = styled.div`
-  ${fadeTransition}
   width: 100%;
   display: flex;
+  text-align: center;
   justify-content: center;
   position: absolute; /* 프로젝트 위에 겹치도록 */
   top: 0;
@@ -33,7 +33,7 @@ const IntroWrapper = styled.div`
 const ProjectsWrapper = styled.div`
   ${fadeTransition}
   margin-top: 3%;
-  padding: 0px 20px;
+  padding: 0px 10px;
   position: relative; /* IntroWrapper와 겹치지 않도록 상대 위치 지정 */
   z-index: 1;
 `;
@@ -46,8 +46,7 @@ const HomeContainer = styled.div`
 `;
 
 const Home = () => {
-  const { language, setNavVisible } = useOutletContext();
-  
+  const { language } = useOutletContext();
 
   // 처음에는 인트로(showIntro)를 보여준다.
   const [showIntro, setShowIntro] = useState(true);
@@ -65,8 +64,7 @@ const Home = () => {
       timerIdRef.current = null; // 타이머 ID 초기화
     };
 
-    // 3초 뒤에 인트로를 자동으로 페이드 아웃
-    timerIdRef.current = setTimeout(hideIntro, 3000);
+    timerIdRef.current = setTimeout(hideIntro, 100);
 
     // 사용자 이벤트 발생 시 1초 후에 인트로를 페이드 아웃
     const handleUserEvent = () => {
@@ -98,20 +96,15 @@ const Home = () => {
   return (
     <HomeContainer>
       {/* 인트로 페이드인/아웃 */}
-      <AnimatePresence
-        onExitComplete={() => {
-          // 여기서 헤더 텍스트 등장 허용
-          setNavVisible(true);
-        }}
-      >
+      <AnimatePresence>
         {showIntro && (
           <IntroWrapper show={showIntro}>
             <motion.div
-            initial={false}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ layout: { duration: 3, ease: "easeInOut" } }}
-          >
+              initial={false}
+              animate={{ opacity: 0 }}
+              exit={{ opacity: 1 }}
+              transition={{ layout: { duration: 0.2 } }}
+            >
               <MainIntro language={language} />
             </motion.div>
           </IntroWrapper>
@@ -119,12 +112,12 @@ const Home = () => {
       </AnimatePresence>
 
       {/* 페이드아웃된 후(즉 showIntro=false) 프로젝트 노출 */}
+        <MainIntro language={language} />
       <ProjectsWrapper show={!showIntro}>
         <MainTitle language={language} />
         <CampridgeProject language={language} />
         <DoggleProject language={language} />
       </ProjectsWrapper>
-      
     </HomeContainer>
   );
 };
