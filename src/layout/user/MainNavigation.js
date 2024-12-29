@@ -1,6 +1,7 @@
 // MainNavigation.jsx
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./MainNavigation.module.scss";
+import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faChevronDown } from "@fortawesome/free-solid-svg-icons";
@@ -102,7 +103,7 @@ const MainNavigation = ({
               </StyledHamburgerButton>
             )}
           </div>
-          <div className={styles.title}>{titleText}</div>
+          <Link to="/" className={styles.title}>{titleText}</Link>
         </motion.div>
         <motion.div className={styles.menu}>
           {/* Email 버튼: 클릭 시 이메일 클라이언트 열림 */}

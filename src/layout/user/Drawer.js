@@ -272,20 +272,6 @@ const Drawer = ({ open, onClose }) => {
   const drawerRef = useRef(null);
   const drawerRefRight = useRef(null);
   const drawerRefLeft = useRef(null);
-
-  // 아이템(이미지와 링크) 배열
-  const navItems = [
-    {
-      image: "../../../public/images/main.png", // 또는 "/images/main.png"
-      path: "/",
-      label: "Home",
-    },
-    {
-      image: "../../../public/images/about.png", // 또는 "/images/about.png"
-      path: "/about",
-      label: "About Me",
-    },
-  ];
   
   const handleNavClick = async (path) => {
     // 페이지 이동

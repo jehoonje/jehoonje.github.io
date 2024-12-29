@@ -36,8 +36,11 @@
     align-items: center;
     font-size: 14px;
     font-weight: bold;
+    text-decoration: none; /* 기본 밑줄 제거 */
+    color: inherit; /* 부모의 글자 색상 상속 */
     margin-left: 10px;
     letter-spacing: 0.8px;
+    cursor: pointer;
 
     @media screen and (max-width: 480px) {
       margin-left: 0px;
