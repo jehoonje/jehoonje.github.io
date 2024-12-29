@@ -62,7 +62,7 @@ const NavItem = styled(motion.a)`
   text-decoration: none; /* 링크의 밑줄 제거 */
 
   &:hover {
-    color: rgb(255, 157, 0);
+    color: #FFC107;
   }
 
   @media (max-width: ${breakpoints.tablet}) {

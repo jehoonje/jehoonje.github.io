@@ -39,6 +39,7 @@ const DescriptionContainer = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
+  color: #333;
   justify-content: end;
 `;
 
@@ -90,17 +91,20 @@ const ModalContent = styled.div`
   width: 100%;
   box-sizing: border-box;
   padding: 16px;
+  line-height: 1.6;
+  min-height: 70vh;
 
   pre {
     white-space: pre-wrap;
     word-wrap: break-word;
     max-width: 100%;
     overflow-x: auto;
-    background: #f6f6f6;
-    padding: 8px;
-    border-radius: 4px;
+    background: #333;
+    color: #333;
+    padding: 28px;
+    border-radius: 10px;
     font-size: 14px;
-    font-family: "Courier New", Courier, monospace;
+    font-family: "Poppins", sans-serif;
   }
 
   img {
@@ -163,53 +167,106 @@ Developed by a team of seven over approximately one month, the project was succe
     }
   }, [isCategoryOpen]);
 
-  // === [탭 콘텐츠 1] 기능 정보(Feature Info) ===
-  const featureContent = (
-    <div>
-      <h2>기능 정보</h2>
-      <p>
-        <b>1) 스탭 기능 (Step Indicator)</b>
+  const featureContent =
+    language === "English" ? (
+      <div>
+        <h2>Frontend (Feature Implementation)</h2>
+        <p>
+          <b>1) Step Indicator (Reservations)</b>
+          <br />
+          &nbsp;&nbsp;- Visually represents each step of the reservation
+          process.
+          <br />
+          &nbsp;&nbsp;- Users can clearly see which step (date selection →
+          hotel list → room details → summary → confirmation) they are on.
+        </p>
         <br />
-        &nbsp;&nbsp;- 예약 프로세스 상 각 단계를 시각적으로 표현해주는 스탭
-        인디케이터
+        <p>
+          <b>2) Hotel Rendering & Paging</b>
+          <br />
+          &nbsp;&nbsp;- Uses Redux for step-based reservation logic.
+          <br />
+          &nbsp;&nbsp;- Search by location, display hotels, room info, booking
+          pages; fully responsive UI.
+          <br />
+          &nbsp;&nbsp;- Integrated with Kakao Address API, Kakao Map, and
+          KakaoPay.
+          <br />
+          &nbsp;&nbsp;- Utilizes framer-motion, slick(slider) library for better
+          UI/UX.
+          <br />
+          &nbsp;&nbsp;- Includes detailed booking info, review listing, etc.
+        </p>
         <br />
-        &nbsp;&nbsp;- 유저가 현재 어느 단계에 있는지 직관적으로 파악 가능
-      </p>
-      <p>
-        <b>2) 호텔 랜더링</b>
+        <p>
+          <b>3) Design (Figma-based)</b>
+          <br />
+          &nbsp;&nbsp;- Created UI/UX mockups with Figma references.
+          <br />
+          &nbsp;&nbsp;- Main page (banner, responsive web), overall color/font
+          concept, etc.
+        </p>
         <br />
-        &nbsp;&nbsp;- 리덕스 상태 관리를 통해 스텝 기반 예약 페이지(페이징) 전환
+        <p>
+          <b>4) Category (Motion Library)</b>
+          <br />
+          &nbsp;&nbsp;- Applied responsive animation effects to enhance UI.
+          <br />
+          &nbsp;&nbsp;- Used motion components for smooth transitions.
+        </p>
+      </div>
+    ) : (
+      // --- 한국어 버전 ---
+      <div>
+        <h2>프론트엔드 (기능 구현)</h2>
+        <p>
+          <b>1) 스텝 기능 (Step Indicator)</b>
+          <br />
+          &nbsp;&nbsp;- 예약 프로세스 상 각 단계를 시각적으로 표현해주는 스텝
+          인디케이터
+          <br />
+          &nbsp;&nbsp;- 유저가 현재 어느 단계에 있는지 직관적으로 파악 가능
+        </p>
         <br />
-        &nbsp;&nbsp;- 검색, 호텔 조회, 객실 조회, 예약 페이지 렌더링, 반응형 UI
+        <p>
+          <b>2) 호텔 랜더링 & 예약 페이징</b>
+          <br />
+          &nbsp;&nbsp;- 리덕스 상태 관리를 통해 스텝 기반 예약 프로세스 처리
+          <br />
+          &nbsp;&nbsp;- 검색(위치) → 호텔 목록 → 객실 상세 → 예약 페이지 →
+          반응형 UI
+          <br />
+          &nbsp;&nbsp;- 카카오 주소 검색 API, 카카오 지도, 카카오페이 연동
+          <br />
+          &nbsp;&nbsp;- framer-motion, slick(slider) 라이브러리를 통해 UI/UX
+          개선
+          <br />
+          &nbsp;&nbsp;- 예약 상세/ 리뷰 조회 기능 등
+        </p>
         <br />
-        &nbsp;&nbsp;- 카카오 주소 검색 API, 카카오 지도, 카카오페이 결제 연동
+        <p>
+          <b>3) 디자인(Figma 활용)</b>
+          <br />
+          &nbsp;&nbsp;- 프로젝트 레퍼런스 및 피그마로 UI/UX 시안 구성
+          <br />
+          &nbsp;&nbsp;- 메인 페이지(배너, 반응형), 전체 색상/폰트 컨셉 등
+        </p>
         <br />
-        &nbsp;&nbsp;- framer-motion, 슬릭(slider) 라이브러리를 활용한 UI/UX 향상
-        <br />
-        &nbsp;&nbsp;- 예약 상세조회, 리뷰 조회·작성 기능
-      </p>
-      <p>
-        <b>3) 디자인</b>
-        <br />
-        &nbsp;&nbsp;- 프로젝트 레퍼런스, 피그마(Figma)로 UI/UX 시안 구성
-        <br />
-        &nbsp;&nbsp;- 메인 페이지(배너, 반응형 웹) / 전체적인 색상, 폰트 컨셉
-        <br />
-      </p>
-      <p>
-        <b>4) 카테고리(모션 라이브러리)</b>
-        <br />
-        &nbsp;&nbsp;- 반응형 애니메이션 효과로 UI 향상
-        <br />
-        &nbsp;&nbsp;- 모션 컴포넌트를 통한 자연스러운 화면 전환
-      </p>
+        <p>
+          <b>4) 카테고리(모션 라이브러리)</b>
+          <br />
+          &nbsp;&nbsp;- 반응형 애니메이션 효과로 UI 향상
+          <br />
+          &nbsp;&nbsp;- 모션 컴포넌트로 자연스러운 화면 전환
+        </p>
+    
 
       <br />
       <br />
-      <h3>주요 코드 예시</h3>
+      <h2>주요 코드 설명</h2>
       <p>
-        <b>1) 스탭 기능 (Step Indicator)</b>
-        <br />
+        <h2>1) 스탭 기능 (Step Indicator)</h2>
+        
         - 예약 프로세스 상 각 단계를 시각적으로 표현하는 스텝 인디케이터를 구현
         <br />- 유저가 현재 어느 단계(날짜 선택 → 호텔 목록 → 객실 상세 → 예약
         요약 → 최종 확인)에 있는지 직관적으로 파악하고 이동
@@ -251,11 +308,11 @@ export default StepIndicator;
         위의 <b>StepIndicator</b> 컴포넌트는 현재 스텝을 시각적으로 표시하며,
         이전 스텝으로의 이동을 가능하게 합니다. 리덕스 상태 관리(`step`)를 통해
         각 단계별로 화면을 전환합니다.
-      </p>
+      </p><br/><br/>
 
       <p>
-        <b>2) 호텔 랜더링 & 예약 페이징</b>
-        <br />
+        <h2>2) 호텔 랜더링 & 예약 페이징</h2>
+        
         - **리덕스** 상태 관리를 통해 스텝 기반 예약 프로세스 처리
         <br />
         - **검색**(위치) → **호텔 조회**(리스트) → **객실 조회** → **예약
@@ -332,11 +389,10 @@ export default HotelPage;
         <b>HotelPage</b> 컴포넌트는 예약 프로세스의 각 단계를 관리하며, 단계에
         따라 적절한 컴포넌트를 렌더링합니다. 리덕스 상태 관리(`step`)를 통해
         스텝을 전환하며, 각 단계별로 필요한 데이터를 로드하고 표시합니다.
-      </p>
+      </p><br/><br/>
 
       <p>
-        <b>3) 카카오 API 활용 (주소 검색, 지도, 카카오페이)</b>
-        <br />
+        <h2>3) 카카오 API 활용 (주소 검색, 지도, 카카오페이)</h2>
         - 주소를 입력받아 Kakao Map Marker 표시
         <br />
         - `MapView` 컴포넌트: `kakao.maps.services.Geocoder()`로 주소→좌표 변환
@@ -466,11 +522,10 @@ export default MapView;
         <b>MapView</b> 컴포넌트는 카카오 지도 API를 활용하여 입력된 주소를
         기반으로 위치를 표시합니다. 주소를 좌표로 변환하여 마커를 표시하고, 줌
         인/아웃 기능을 제공합니다.
-      </p>
+      </p><br/><br/>
 
       <p>
-        <b>4) UI/UX 라이브러리 활용 (framer-motion, react-slick)</b>
-        <br />
+        <h2>4) UI/UX 라이브러리 활용 (framer-motion, react-slick)</h2>
         - **framer-motion**: Drawer, 모달 등 애니메이션 효과 구현
         <br />- **react-slick**: 호텔 이미지 슬라이더 구현
       </p>
@@ -681,11 +736,11 @@ export default Drawer;
         구현하였습니다. Drawer가 열리고 닫힐 때 자연스러운 스프링 애니메이션을
         적용하여 사용자 경험을 향상시킵니다. 또한, **react-slick**이나
         **Swiper**와 함께 사용하여 슬라이더 효과를 적용할 수 있습니다.
-      </p>
+      </p><br/><br/>
 
       <p>
-        <b>5) 예약 상세조회, 리뷰 조회 랜더링</b>
-        <br />
+        <h2>5) 예약 상세조회, 리뷰 조회 랜더링</h2>
+        
         - 예약 목록 페이지 → 예약 상세 페이지에서 **리뷰** 확인 및 작성
         <br />- **ReviewList** 컴포넌트에서 리뷰 등록/수정/삭제 기능 구현
       </p>
@@ -785,11 +840,11 @@ export default ReviewList;
         <b>ReviewList</b> 컴포넌트는 **Swiper**를 활용하여 리뷰를 슬라이더
         형태로 표시합니다. **react-redux**를 통해 리뷰 데이터를 관리하며,
         **FaStar** 아이콘을 사용하여 평점을 시각적으로 표현합니다.
-      </p>
+      </p><br/><br/>
 
       <p>
-        <b>6) 프로젝트 메인 페이지 랜더링 / 디자인 / 배너</b>
-        <br />
+        <h2>6) 프로젝트 메인 페이지 랜더링 / 디자인 / 배너</h2>
+        
         - 홈(메인) 화면에서 **Swiper**로 배너 / 광고 / 이벤트 표시
         <br />- **Drawer**(햄버거 메뉴) 사용하여 화면 전환 시 자연스러운 모션
       </p>
@@ -825,27 +880,59 @@ export default DoggleProject;
         구현하였습니다. Drawer가 열리고 닫힐 때 자연스러운 스프링 애니메이션을
         적용하여 사용자 경험을 향상시킵니다. 또한, **react-slick**이나
         **Swiper**와 함께 사용하여 슬라이더 효과를 적용할 수 있습니다.
-      </p>
+      </p><br/><br/>
     </div>
   );
+  
 
-  // === [탭 콘텐츠 2] 아키 텍쳐(Architecture) ===
-  const architectureContent = (
-    <div>
-      <h2>아키 텍쳐</h2>
-      <img src="/images/architecture.png" alt="Doggle Architecture" />
-    </div>
-  );
+  // ===================================
+  // 2) [탭 콘텐츠] Architecture
+  // ===================================
+  const architectureContent =
+    language === "English" ? (
+      <div>
+        <h2>Architecture</h2>
+        <p>
+          The overall project architecture of Doggle.  
+          React + Redux (Frontend) / Spring Boot (Backend) / AWS EC2 deployment / Kakao APIs integration
+        </p>
+        <img src="/images/architecture.png" alt="Doggle Architecture" />
+      </div>
+    ) : (
+      <div>
+        <h2>아키 텍쳐</h2>
+        <p>
+          도글 프로젝트의 전체 아키텍처입니다.
+          <br />
+          React + Redux(프론트) / Spring Boot(백엔드) / AWS EC2 배포 / 카카오
+          API 연동
+        </p>
+        <img src="/images/architecture.png" alt="Doggle Architecture" />
+      </div>
+    );
 
-  // === [탭 콘텐츠 3] ERD Diagram ===
-  const erdContent = (
-    <div>
-      <h2>ERD그램</h2>
-      <p>프로젝트 전체의 데이터베이스 구조 입니다.</p>
-      <img src="/images/erd_dog.png" alt="Doggle ERD" />
-      <p>실제 DB에서는 MySQL(MariaDB) + JPA 사용</p>
-    </div>
-  );
+  // ===================================
+  // 3) [탭 콘텐츠] ERD Diagram
+  // ===================================
+  const erdContent =
+    language === "English" ? (
+      <div>
+        <h2>ER Diagram</h2>
+        <p>
+          The overall database structure for the Doggle project.
+          <br />
+          MySQL(MariaDB) + JPA used in actual deployment.
+        </p>
+        <img src="/images/erd_dog.png" alt="Doggle ERD" />
+      </div>
+    ) : (
+      <div>
+        <h2>ER Diagram</h2>
+        <p>프로젝트 전체의 데이터베이스 구조입니다.</p>
+        <img src="/images/erd_dog.png" alt="Doggle ERD" />
+        <p>실제 DB에서는 MySQL(MariaDB) + JPA를 사용했습니다.</p>
+      </div>
+    );
 
   return (
     <>
@@ -853,7 +940,7 @@ export default DoggleProject;
       className={`${styles.category} ${isCategoryOpen ? styles.categoryOpen : ""}`}
       onClick={handleCategoryClick}
     >
-      <p>WEB</p>
+      <p>WEB / Team Project</p>
       <div
         className={styles.clickContainer} // 추가: 스타일 적용을 위한 클래스
       >
@@ -916,7 +1003,7 @@ export default DoggleProject;
                   active={activeTab === "feature"}
                   onClick={() => setActiveTab("feature")}
                 >
-                  {language === "English" ? "Feature Info" : "기능 정보"}
+                  {language === "English" ? "Feature Info" : "기능 구현"}
                 </ToggleButton>
 
                 <ToggleButton

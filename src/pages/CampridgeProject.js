@@ -53,6 +53,7 @@ const DescriptionContainer = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
+  color: #333;
   justify-content: end;
 `;
 
@@ -164,9 +165,10 @@ const ZoomableImage = ({ src, alt }) => {
  */
 const ModalContent = styled.div`
   width: 100%;
-  // max-width: 800px; /* 기본 최대 너비 */
+  max-width: 80vh; /* 기본 최대 너비 */
   box-sizing: border-box; /* 패딩과 보더를 너비에 포함 */
   padding: 16px; /* 내부 여백 추가 */
+  
 
   /* 모달 내부의 pre 태그 스타일링 */
   pre {
@@ -174,11 +176,12 @@ const ModalContent = styled.div`
     word-wrap: break-word; /* 긴 단어를 줄바꿈 */
     max-width: 100%; /* pre 태그가 컨테이너를 넘지 않도록 */
     overflow-x: auto; /* 필요한 경우 내부 스크롤 */
-    background: #f6f6f6;
-    padding: 8px;
+    background: #333 !important; /* 배경색 지정 */
+    color: #fff; /* 글자색 지정 */
+    padding: 28px !important; /* 내부 여백 추가 */
     border-radius: 4px;
     font-size: 14px;
-    font-family: "Courier New", Courier, monospace;
+    
   }
 
   /* 모달 내부의 기타 콘텐츠가 넘치지 않도록 */
@@ -210,6 +213,13 @@ const CampridgeProject = ({ language }) => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+  function toggleActive(element) {
+    // 다른 active 상태 제거
+    document.querySelectorAll('.category').forEach((el) => el.classList.remove('active'));
+    
+    // 현재 클릭한 요소에 active 추가
+    element.classList.add('active');
+  }
   // 프로젝트 기본 정보 (영어 / 한글)
   const titleText = language === "English" ? "Campridge" : "캠프릿지";
   const projectDetails =
@@ -358,7 +368,7 @@ const CampridgeProject = ({ language }) => {
           &nbsp;&nbsp;* On screen transitions (checking userId validity) → if
           user already wrote a review, the button is disabled, etc.
         </p>
-        <pre style={{ background: "#f6f6f6", padding: "8px" }}>
+        <pre>
           {`jsx
 // AuthContext.js
 export const AuthContext = createContext();
@@ -407,7 +417,7 @@ export const AuthProvider = ({ children }) => {
           &nbsp;&nbsp;* When a marker is clicked, JS side sends message type:
           '...Selected' → RN navigates to detail screen.
         </p>
-        <pre style={{ background: "#f6f6f6", padding: "8px" }}>
+        <pre>
           {`jsx
 // MapView.js
 useEffect(() => {
@@ -495,7 +505,7 @@ const onMessage = useCallback((event) => {
           &nbsp;&nbsp;* If the token is expired,
           refreshAccessToken(refreshToken) to renew.
         </p>
-        <pre style={{ background: "#f6f6f6", padding: "8px" }}>
+        <pre>
           {`java
 // SecurityConfig.java
 @Bean
@@ -568,7 +578,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
           <br />* Scheduler: refreshes DB periodically to prevent API traffic
           issues.
         </p>
-        <pre style={{ background: "#f6f6f6", padding: "8px" }}>
+        <pre>
           {`java
 // JwtTokenUtil.java
 @Override
@@ -758,7 +768,7 @@ protected void doFilterInternal(HttpServletRequest request,
           &nbsp;&nbsp;* 화면 전환 시(userId 유효성 체크) → 이미 리뷰 작성한 경우
           버튼 비활성, 등등.
         </p>
-        <pre style={{ background: "#f6f6f6", padding: "8px" }}>
+        <pre >
           {`jsx
 // AuthContext.js
 export const AuthContext = createContext();
@@ -805,7 +815,7 @@ export const AuthProvider = ({ children }) => {
           &nbsp;&nbsp;* 마커 클릭 시 JS 쪽에서 type: '...Selected' 메시지 →
           RN에서 상세 화면 이동.
         </p>
-        <pre style={{ background: "#f6f6f6", padding: "8px" }}>
+        <pre >
           {`jsx
 // MapView.js
 useEffect(() => {
@@ -889,7 +899,7 @@ const onMessage = useCallback((event) => {
           <br />
           &nbsp;&nbsp;* 토큰 만료 시 refreshAccessToken(refreshToken)로 갱신.
         </p>
-        <pre style={{ background: "#f6f6f6", padding: "8px" }}>
+        <pre>
           {`java
 // SecurityConfig.java
 @Bean
@@ -959,7 +969,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
           * Encoding: utf8mb4로 설정(AWS RDS 한글 깨짐 대응).
           <br />* 스케줄러: API 트래픽 제한 방지, 일정 주기로 DB 갱신.
         </p>
-        <pre style={{ background: "#f6f6f6", padding: "8px" }}>
+        <pre >
           {`java
 // JwtTokenUtil.java
 @Override
@@ -1278,7 +1288,7 @@ protected void doFilterInternal(HttpServletRequest request,
       </div>
     ) : (
       <div>
-        <h3>ERD그램</h3>
+        <h3>ER Diagram</h3>
         <ZoomableImage src="/images/erd.png" alt="ERD 다이어그램" />
         <p style={{ marginTop: "12px" }}>
           위 이미지를 클릭하면 확대해서 볼 수 있습니다.
@@ -1292,7 +1302,7 @@ protected void doFilterInternal(HttpServletRequest request,
       className={`${styles.category} ${isCategoryOpen ? styles.categoryOpen : ""}`}
       onClick={handleCategoryClick}
     >
-      <p>APP</p>
+      <p>APP / Individual</p>
       <div
         className={styles.clickContainer} // 추가: 스타일 적용을 위한 클래스
       >

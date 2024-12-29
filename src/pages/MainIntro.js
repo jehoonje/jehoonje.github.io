@@ -8,6 +8,7 @@ import styles from "../styles/MainIntro.module.scss";
  * @param {string} variant - "small"이면 Projects 내에서 사용될 작은 인트로
  */
 function MainIntro({ language, onClickMore, variant = "large" }) {
+  
   const introText =
     language === "English"
       ? "I am a developer who helps businesses grow through web and app development. I focus on creating simple."

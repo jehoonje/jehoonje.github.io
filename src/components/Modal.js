@@ -1,5 +1,6 @@
 // src/components/Modal.js
-import React from "react";
+
+import React, { useEffect } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { IoClose } from "react-icons/io5";
 
@@ -33,14 +34,19 @@ const ModalContainer = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
+  line-height: 1.5;
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 800px;
   max-height: 80vh; /* 세로 최대 높이 */
-  overflow-y: auto; /* 내용이 길어질 경우 스크롤 */
   background-color: #fff;
   border-radius: 8px;
   z-index: 10000;
+  display: flex;
+  flex-direction: column;
+
+  /* 스크롤은 내부 Body에서만 */
+  overflow: hidden;
 
   animation: ${({ isOpen }) =>
     isOpen
@@ -48,17 +54,23 @@ const ModalContainer = styled.div`
       : css`${fadeOut} 0.3s forwards`};
 `;
 
+/* 
+  헤더 부분을 고정(스크롤 시에도 상단 고정)
+  position: sticky + top: 0  
+*/
 const ModalHeader = styled.div`
-  position: relative;
+  position: sticky;
+  top: 0;
   padding: 10px;
-  background-color: #333;
+  background-color: #2f2f2f;
   color: #fff;
   font-size: 16px;
+  z-index: 10001; /* 헤더가 Body 내용 위로 보이도록 */
 `;
 
 const CloseButton = styled.button`
   position: absolute;
-  top:8px;
+  top: 6px;
   right: 8px;
   background: none;
   border: none;
@@ -69,27 +81,19 @@ const CloseButton = styled.button`
 
 const ModalBody = styled.div`
   padding: 16px;
+  overflow-y: auto; /* Body 영역만 스크롤 가능 */
 
-  /* 예: 슬라이드 부분(임시 구역) */
-  .slide-container {
-    margin-bottom: 20px;
-    /* react-slick이나 Swiper 같은 라이브러리의 클래스에 맞춰 스타일링 가능 */
-  }
-
-  /* 예: 내용(문단 등) */
-  .content-section {
-    margin-bottom: 20px;
-  }
-
-  /* 예: 타이틀 */
-  .section-title {
-    font-weight: bold;
-    margin: 16px 0 8px;
+  /* 스크롤바 숨기기 (옵션) */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE10+ */
+  
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
   }
 `;
 
 const ModalFooter = styled.div`
-  padding: 16px;
+  padding: 10px;
   display: flex;
   justify-content: flex-end;
   background-color: #f4f4f4;
@@ -97,16 +101,30 @@ const ModalFooter = styled.div`
 
 /* 모달 컴포넌트 */
 const Modal = ({ isOpen, onClose, title, children }) => {
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden"; // 배경 스크롤 비활성화
+    } else {
+      document.body.style.overflow = "auto"; // 스크롤 복원
+    }
+
+    return () => {
+      document.body.style.overflow = "auto"; // 컴포넌트 언마운트 시 복원
+    };
+  }, [isOpen]);
 
   const handleOverlayClick = () => onClose();
   const stopPropagation = (e) => e.stopPropagation();
+
+  if (!isOpen) return null;
 
   return (
     <Overlay isOpen={isOpen} onClick={handleOverlayClick}>
       <ModalContainer isOpen={isOpen} onClick={stopPropagation}>
         <ModalHeader>
-          <CloseButton onClick={onClose}><IoClose /></CloseButton>
+          <CloseButton onClick={onClose}>
+            <IoClose />
+          </CloseButton>
           {title}
         </ModalHeader>
 
@@ -117,10 +135,14 @@ const Modal = ({ isOpen, onClose, title, children }) => {
 
         <ModalFooter>
           {/* 닫기 버튼 혹은 추가 버튼 */}
-          <button onClick={onClose} style={{ marginRight: '8px' }}>
-            닫기
+          <button onClick={onClose} style={{ 
+            marginRight: '8px',
+             
+            }}
+            >
+            exit
           </button>
-          {/* 필요 시 다음 보기, 페이지 이동 등 다른 버튼 추가 */}
+          {/* 필요 시 다른 버튼 추가 가능 */}
         </ModalFooter>
       </ModalContainer>
     </Overlay>

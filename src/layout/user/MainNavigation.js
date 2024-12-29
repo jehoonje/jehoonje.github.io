@@ -30,7 +30,7 @@ const MainNavigation = ({
   // 간단 예시로, 아래처럼 "인트로를 이미 보여줬다"는 가정하에 항상 표시한다고 칩니다.
 
   // 언어 변경에 따른 제목과 소개 텍스트
-  const titleText = language === "English" ? "Jehoon Lim" : "임제훈";
+  const titleText = language === "English" ? "Alex Lim" : "임제훈";
   // const introText =
   //   language === "English"
   //     ? "I am a developer who helps businesses grow through web and app development. I focus on creating simple."
@@ -172,9 +172,9 @@ const StyledHamburgerButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    color: #d88254;
+    color: #FFC107;
   }
-
+ font-family: "Poppins", sans-serif;
   @media screen and (max-width: 480px) {
     display: none;
   }

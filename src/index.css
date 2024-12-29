@@ -6,6 +6,12 @@ html, body {
   /* 스크롤바 제거(원한다면) */
   overflow-y: scroll; 
   scrollbar-width: none; /* 파이어폭스 전용 */
+  
+  /* Chrome, Safari, Edge */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
 }
 
 body::-webkit-scrollbar {
