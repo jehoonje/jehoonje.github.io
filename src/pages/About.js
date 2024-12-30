@@ -1,12 +1,15 @@
 // src/components/About.jsx
-import React from "react";
+import React, { useState } from "react";
 import styles from "../styles/About.module.scss";
 import { useOutletContext } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const About = () => {
   // RootLayout (혹은 부모 컴포넌트)에서 전달받은 language
   const { language } = useOutletContext();
+
+  // 이미지 로딩 상태
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   // 한국어 자기소개
   const descriptionKr = `안녕하세요. 웹과 앱으로 의미 있는 변화를 발견하는 개발자 임제훈 입니다. 
@@ -36,11 +39,15 @@ Thank you.`;
       transition={{ duration: 0.6 }}
     >
       <div className={styles.container}>
-        <img
-          src="/images/profile.jpeg"
-          alt="Profile"
-          className={styles.profileImage}
-        />
+        <div className={styles.imageWrapper}>
+          {!isImageLoaded && <div className={styles.imageSkeleton}></div>}
+          <img
+            src="/images/profile.jpeg"
+            alt="Profile"
+            className={`${styles.profileImage} ${isImageLoaded ? styles.showImage : styles.hideImage}`}
+            onLoad={() => setIsImageLoaded(true)}
+          />
+        </div>
         {/* 줄바꿈 처리를 위해 CSS에서 white-space: pre-line; 등을 적용해 주세요. */}
         <p className={styles.description}>{description}</p>
       </div>

@@ -7,6 +7,7 @@ import styles from "../styles/MainIntro.module.scss";
  * @param {function} onClickMore - "더 보기" 버튼 클릭 핸들러 (필요 없으면 생략 가능)
  * @param {string} variant - "small"이면 Projects 내에서 사용될 작은 인트로
  */
+
 function MainIntro({ language, onClickMore, variant = "large" }) {
   
   const introText =

@@ -17,7 +17,6 @@ const MainNavigation = ({
   const [openNotice, setOpenNotice] = useState(false);
   const noticeRef = useRef(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
-  const [isOpen, setIsOpen] = useState(false);
 
   // RootLayout에서 받은 language 사용
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);

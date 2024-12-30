@@ -1,6 +1,7 @@
 // src/components/Modal.js
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import ReactDOM from "react-dom"; // 포털을 사용하기 위한 임포트
 import styled, { keyframes, css } from "styled-components";
 import { IoClose } from "react-icons/io5";
 
@@ -38,7 +39,9 @@ const ModalContainer = styled.div`
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 800px;
-  max-height: 80vh; /* 세로 최대 높이 */
+  // 아래 추가
+  max-height: 80vh;       /* 화면 높이 대비 최대 높이 지정 */
+  overflow-y: auto;       /* 내부 스크롤 */
   background-color: #fff;
   border-radius: 8px;
   z-index: 10000;
@@ -70,8 +73,8 @@ const ModalHeader = styled.div`
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 6px;
-  right: 8px;
+  top: 8px;
+  right: 4px;
   background: none;
   border: none;
   color: #fff;
@@ -83,6 +86,9 @@ const ModalBody = styled.div`
   padding: 16px;
   overflow-y: auto; /* Body 영역만 스크롤 가능 */
 
+  overscroll-behavior-y: contain; /* 모달 내부 스크롤이 끝나도 이벤트가 바깥으로 전파되지 않게 함 */
+
+  
   /* 스크롤바 숨기기 (옵션) */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE10+ */
@@ -93,14 +99,33 @@ const ModalBody = styled.div`
 `;
 
 const ModalFooter = styled.div`
+  position: relative; /* ProgressBar 위치 조정을 위해 relative 설정 */
   padding: 10px;
-  display: flex;
-  justify-content: flex-end;
   background-color: #f4f4f4;
+`;
+
+/* ProgressBar 컴포넌트 */
+const ProgressBarContainer = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 10px; /* 원하는 높이 설정 */
+  background-color: #e0e0e0; /* 배경색 */
+`;
+
+const ProgressBar = styled.div`
+  height: 100%;
+  width: ${({ progress }) => progress}%;
+  background-color:rgb(236, 219, 24); /* 진행 바 색상 */
+  transition: width 0.2s ease-out;
 `;
 
 /* 모달 컴포넌트 */
 const Modal = ({ isOpen, onClose, title, children }) => {
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const bodyRef = useRef(null);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden"; // 배경 스크롤 비활성화
@@ -113,12 +138,39 @@ const Modal = ({ isOpen, onClose, title, children }) => {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const element = bodyRef.current;
+      if (element) {
+        const { scrollTop, scrollHeight, clientHeight } = element;
+        const totalScroll = scrollHeight - clientHeight;
+        const currentScroll = scrollTop;
+        const scrolled = (currentScroll / totalScroll) * 100;
+        setScrollProgress(isNaN(scrolled) ? 0 : scrolled);
+      }
+    };
+
+    const element = bodyRef.current;
+    if (isOpen && element) {
+      element.addEventListener("scroll", handleScroll);
+      // 초기 상태 설정
+      handleScroll();
+    }
+
+    return () => {
+      if (element) {
+        element.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [isOpen]);
+
   const handleOverlayClick = () => onClose();
   const stopPropagation = (e) => e.stopPropagation();
 
   if (!isOpen) return null;
 
-  return (
+  // 포털을 사용하여 모달을 #modal-root에 렌더링
+  return ReactDOM.createPortal(
     <Overlay isOpen={isOpen} onClick={handleOverlayClick}>
       <ModalContainer isOpen={isOpen} onClick={stopPropagation}>
         <ModalHeader>
@@ -129,23 +181,18 @@ const Modal = ({ isOpen, onClose, title, children }) => {
         </ModalHeader>
 
         {/* children이나 추가 데이터 */}
-        <ModalBody>
+        <ModalBody ref={bodyRef}>
           {children}
         </ModalBody>
 
         <ModalFooter>
-          {/* 닫기 버튼 혹은 추가 버튼 */}
-          <button onClick={onClose} style={{ 
-            marginRight: '8px',
-             
-            }}
-            >
-            exit
-          </button>
-          {/* 필요 시 다른 버튼 추가 가능 */}
+          <ProgressBarContainer>
+            <ProgressBar progress={scrollProgress} />
+          </ProgressBarContainer>
         </ModalFooter>
       </ModalContainer>
-    </Overlay>
+    </Overlay>,
+    document.getElementById('modal-root') // 포털 타겟 지정
   );
 };
 

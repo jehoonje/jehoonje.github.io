@@ -5,6 +5,8 @@ import styled from "styled-components";
 import styles from "../styles/Layout.module.scss";
 import Modal from "../components/Modal"; // 모달 컴포넌트
 import { GoArrowUpRight } from "react-icons/go";
+import { useSwipeable } from "react-swipeable";
+
 
 // === styled-components ===
 const VideoContainer = styled.div`
@@ -94,13 +96,17 @@ const ModalContent = styled.div`
   line-height: 1.6;
   min-height: 70vh;
 
+  @media (max-width: 480px) {
+    padding: 0px;
+  }
+
   pre {
     white-space: pre-wrap;
     word-wrap: break-word;
     max-width: 100%;
     overflow-x: auto;
     background: #333;
-    color: #333;
+    color: #fff;
     padding: 28px;
     border-radius: 10px;
     font-size: 14px;
@@ -125,7 +131,29 @@ const DoggleProject = ({ language }) => {
   // 모달 열기/닫기
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-
+  
+  // 탭 순서 정의
+    const tabs = ["feature", "architecture", "erd"];
+  
+    // 현재 탭의 인덱스
+    const currentTabIndex = tabs.indexOf(activeTab);
+  
+    // 스와이프 핸들러
+    const handlers = useSwipeable({
+      onSwipedLeft: () => {
+        if (currentTabIndex < tabs.length - 1) {
+          setActiveTab(tabs[currentTabIndex + 1]);
+        }
+      },
+      onSwipedRight: () => {
+        if (currentTabIndex > 0) {
+          setActiveTab(tabs[currentTabIndex - 1]);
+        }
+      },
+      preventDefaultTouchmoveEvent: true,
+      trackMouse: true, // 마우스로도 스와이프 가능하게 설정 (선택 사항)
+    });
+    
   // === 다국어 대응 ===
   const titleText = language === "English" ? "Doggle" : "도글";
   const projectDetails =
@@ -996,7 +1024,8 @@ export default DoggleProject;
             onClose={closeModal}
             title="프로젝트 상세"
           >
-            <ModalContent>
+            {/* 스와이프 핸들러 적용 */}
+            <ModalContent {...handlers}>
               {/* 탭 전환 버튼 */}
               <ToggleButtonWrapper>
                 <ToggleButton

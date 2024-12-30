@@ -4,7 +4,7 @@ import styled from "styled-components";
 import styles from "../styles/Layout.module.scss";
 import Modal from "../components/Modal";
 import { GoArrowUpRight } from "react-icons/go";
-import { TbHandClick } from "react-icons/tb";
+import { useSwipeable } from "react-swipeable"; 
 
 // 스켈레톤 스타일 정의
 const VideoSkeleton = styled.div`
@@ -179,9 +179,8 @@ const ModalContent = styled.div`
     background: #333 !important; /* 배경색 지정 */
     color: #fff; /* 글자색 지정 */
     padding: 28px !important; /* 내부 여백 추가 */
-    border-radius: 4px;
+    border-radius: 10px;
     font-size: 14px;
-    
   }
 
   /* 모달 내부의 기타 콘텐츠가 넘치지 않도록 */
@@ -213,13 +212,28 @@ const CampridgeProject = ({ language }) => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  function toggleActive(element) {
-    // 다른 active 상태 제거
-    document.querySelectorAll('.category').forEach((el) => el.classList.remove('active'));
+  // 탭 순서 정의
+      const tabs = ["feature", "troubleshoot", "flowchart", "erd"];
     
-    // 현재 클릭한 요소에 active 추가
-    element.classList.add('active');
-  }
+      // 현재 탭의 인덱스
+      const currentTabIndex = tabs.indexOf(activeTab);
+    
+      // 스와이프 핸들러
+      const handlers = useSwipeable({
+        onSwipedLeft: () => {
+          if (currentTabIndex < tabs.length - 1) {
+            setActiveTab(tabs[currentTabIndex + 1]);
+          }
+        },
+        onSwipedRight: () => {
+          if (currentTabIndex > 0) {
+            setActiveTab(tabs[currentTabIndex - 1]);
+          }
+        },
+        preventDefaultTouchmoveEvent: true,
+        trackMouse: true, // 마우스로도 스와이프 가능하게 설정 (선택 사항)
+      });
+  
   // 프로젝트 기본 정보 (영어 / 한글)
   const titleText = language === "English" ? "Campridge" : "캠프릿지";
   const projectDetails =
@@ -1361,8 +1375,8 @@ protected void doFilterInternal(HttpServletRequest request,
             onClose={closeModal}
             title={language === "English" ? "Project Details" : "프로젝트 상세"}
           >
-            {/* 모달 콘텐츠를 ModalContent로 감싸서 스타일 적용 */}
-            <ModalContent>
+            {/* 스와이프 핸들러 적용 */}
+            <ModalContent {...handlers}>
               {/* 탭 전환 버튼 (4개) */}
               <ToggleButtonWrapper>
                 <ToggleButton
