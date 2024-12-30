@@ -1339,7 +1339,7 @@ protected void doFilterInternal(HttpServletRequest request,
               </TagContainer>
 
               <ButtonContainer>
-                <button onClick={openModal}>
+              <button style={{color: '#333',}} onClick={openModal}>
                   {projectDetails}
                   <GoArrowUpRight className={styles.icon} />
                 </button>

@@ -41,7 +41,7 @@ const DescriptionContainer = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  color: #333;
+  color: #333 !important;
   justify-content: end;
 `;
 
@@ -988,7 +988,7 @@ export default DoggleProject;
               </TagContainer>
 
               <ButtonContainer>
-                <button onClick={openModal}>
+                <button style={{color: '#333',}} onClick={openModal}>
                   {projectDetails}
                   <GoArrowUpRight className={styles.icon} />
                 </button>
