@@ -12,8 +12,8 @@ import { useSwipeable } from "react-swipeable";
 const VideoContainer = styled.div`
   position: relative;
   bottom: 50px;
-  width: 100%;
-  padding-top: 60%;
+  width: 90%;
+  padding-top: 55%;
   overflow: hidden;
   border-radius: 20px;
   display: flex;
@@ -36,7 +36,7 @@ const StyledVideo = styled.video`
 `;
 
 const DescriptionContainer = styled.div`
-  max-width: 320px;
+  max-width: 400px;
 `;
 
 const ButtonContainer = styled.div`
@@ -147,12 +147,14 @@ It emphasizes personalized features, allowing users to register their dogs and r
 Similar to a typical hotel commerce platform, it also offers hotel and daycare reservations exclusively for dogs.
 Additionally, a community feature enables user interactions and information sharing.
 Developed by a team of seven over approximately one month, the project was successfully deployed but is currently not in operation.`
-      : `도글은 반려견을 키우는 분들을 위한 복합 서비스 플랫폼입니다.
-반려견 정보를 등록하면 맞춤형 간식을 추천받고 패키지 형태로 구매할 수 있으며,
-반려견 전용 호텔 및 유치원 예약 서비스도 제공합니다.
-또한, 유저 간 커뮤니티 기능을 통해 반려견 관련 정보를 공유하고 소통할 수 있습니다.
-이 프로젝트는 7인 팀이 약 한 달간 협업하여 개발했으며, 프론트엔드로 참여해 호텔예약, 결제 및 메인화면, 드로어 외 전체적인 디자인을 맡았습니다. 
-배포까지 완료되었으나 현재는 서비스를 운영하지 않고 있습니다.
+      : `•  반려인들을 위한 복합 서비스 플랫폼<br />
+•  반려견 정보를 등록하면 맞춤형 간식을 추천받고 패키지 형태로 구매 서비스 제공<br />
+•  반려견 전용 호텔 및 유치원 예약 서비스도 제공<br />
+•  유저 간 커뮤니티 기능을 통해 반려견 관련 정보를 공유<br />
+•  프론트엔드로 참여해 호텔예약 전체, 결제, 메인화면, 카테고리 구현<br />
+•  7인 팀으로 약 한 달간 협업하여 개발<br />
+•  Figma를 활용한 전체적인 디자인 방향성 제시<br />
+•  배포까지 완료되었으나 현재는 서비스를 운영 X
       `;
 
   // 카테고리 div 클릭 시 열고 닫기 토글
@@ -974,16 +976,17 @@ export default DoggleProject;
             <DescriptionContainer>
               <h2>{titleText}</h2>
               <h3>{categoryText}</h3>
-              <p>{descriptionText}</p>
+              <p dangerouslySetInnerHTML={{ __html: descriptionText }} />
               <TagContainer style={{ marginTop: "25px" }}>
                 <Tag>React</Tag>
                 <Tag>Redux</Tag>
-                <Tag>Html/Sass/JS</Tag>
+                <Tag>Html/Css/JS</Tag>
+                <Tag>Sass</Tag>
                 <Tag>Java</Tag>
                 <Tag>SpringBoot</Tag>
                 <Tag>MySQL</Tag>
                 <Tag>AWS EC2</Tag>
-                <Tag>카카오 API</Tag>
+                <Tag>Github-Action</Tag>
                 {/* 필요에 따라 태그(사용 기술) 추가 */}
               </TagContainer>
 

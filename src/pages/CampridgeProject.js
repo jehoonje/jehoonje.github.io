@@ -48,7 +48,10 @@ const StyledVideo = styled.video`
 `;
 
 const DescriptionContainer = styled.div`
-  max-width: 320px;
+  max-width: 375px;
+  @media (max-width: 600px) {
+    max-width: 320px;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -228,15 +231,12 @@ const CampridgeProject = ({ language }) => {
          Users can create accounts by signing up. 
          The production period was from October to December 2024, taking about 3 months. 
          It is currently about to be released on the Play Store.`
-      : `공공 데이터를 활용해 제작한 아웃도어를 위한 지도 앱 입니다.
-         유저 친화적이고 직관적인 UI로 간편성을 강조하려 기획 했고
-         주 기능은 유저의 주변 또는 국내의 지도를 제공하며 마커 필터링 기능을 통해
-         원하는 정보만 찾아 볼 수 있도록 구성되어있습니다.
-         또한 데이터에서 제공하는 정보를 통해 장소의 상세한 정보 또한 알 수 있으며,
-         리뷰를 작성하고 공유하여 유저들 간의 소통이 가능하도록 제작하였습니다.
-         따라서 이에 따라 유저들은 가입을 통해 계정을 개설 할 수 있습니다.
-         제작기간 2024년 10월 ~ 12월 까지 약 3개월 소요 되었습니다.
-         현재 플레이스토어에 출시를 앞두고 있습니다.`;
+      : `•  React Native 기반의 모바일 애플리케이션<br />
+      •  공공 데이터를 활용한 캠핑장, 낚시터, 해수욕장 등 레저·아웃도어 위치 정보, 상세 정보를 제공<br />
+      •  유저 친화적이고 직관적인 UI로 간편성을 강조<br />
+      •  다중 레이어 드롭다운 메뉴로 위치정보 필터링 기능<br />
+      •  사용자 기반 후기(Review) 시스템과 즐겨찾기(Favorites) 기능 제공<br />
+      •  현재 플레이스토어 비공개테스트 단계로 출시 예정`;
 
   // 카테고리 div 클릭 시 열고 닫기 토글
   const handleCategoryClick = () => {
@@ -673,21 +673,23 @@ protected void doFilterInternal(HttpServletRequest request,
           &nbsp;&nbsp;* React Native에서 카카오/구글 OAuth & 이메일(회원가입)
           방식을 지원.
           <br />
-          &nbsp;&nbsp;* 인증 시 Spring Boot 서버로 요청, JWT(Access, Refresh)
+          &nbsp;&nbsp;* 인증 시 Spring Boot 서버로 요청, 보안 강화를 위해 JWT(Access, Refresh)
           토큰 발급받음.
+          <br />
+          &nbsp;&nbsp;* AuthContext를 통해 글로벌 인증 상태를 관리하며, 로그인/로그아웃, 사용자 정보 추출, 권한 관리 등의 기능을 제공
         </p>
         <br />
         <p>
           2) <b>앱 실행 시 부트 스플래시</b>
           <br />
           &nbsp;&nbsp;* 앱 구동 시, RNBootSplash로 로딩 화면 → 데이터 로딩 &
-          지도 준비 끝나면 스플래시 종료.
+          지도 준비 끝나면 스플래시 종료. 사용자 경험 향상
         </p>
         <br />
         <p>
           3) <b>지도 화면(WebView + Leaflet)</b>
           <br />
-          &nbsp;&nbsp;* React Native에서 WebView로 map.html 파일을 로드.
+          &nbsp;&nbsp;* React Native에서 WebView로 map.html 파일을 로드. 
           <br />
           &nbsp;&nbsp;* Leaflet + OpenStreetMap 기반, 각종 장소(캠핑장,
           해수욕장, 낚시터, 휴게소 등) 마커 표시.
@@ -706,6 +708,8 @@ protected void doFilterInternal(HttpServletRequest request,
           <br />
           &nbsp;&nbsp;* 마커 클릭 시 WebView → RN으로 메시지 전송 →
           navigation.navigate(...)로 상세 페이지 진입.
+          <br />
+          &nbsp;&nbsp;* debounce를 적용하여 다중 레이어 드롭다운 메뉴의 사용자 경험 향상
         </p>
         <br />
         <p>
@@ -745,7 +749,7 @@ protected void doFilterInternal(HttpServletRequest request,
         </p>
         <br />
         <p>
-          * 이메일 회원가입
+          * 단계적 이메일 회원가입
           <br />
           &nbsp;&nbsp;* 이메일 인증(5분 만료) → VerificationToken으로 검증.
           <br />
@@ -1325,7 +1329,8 @@ protected void doFilterInternal(HttpServletRequest request,
             <DescriptionContainer>
               <h2>{titleText}</h2>
               <h3>{categoryText}</h3>
-              <p>{descriptionText}</p>
+              <p dangerouslySetInnerHTML={{ __html: descriptionText }} />
+
 
               <TagContainer style={{ marginTop: "25px" }}>
                 <Tag>ReactNative</Tag>
