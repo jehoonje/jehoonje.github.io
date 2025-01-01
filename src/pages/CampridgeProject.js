@@ -33,7 +33,7 @@ const VideoSkeleton = styled.div`
 // === styled-components ===
 const VideoContainer = styled.div`
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 22px;
   display: flex;
   border: 1px solid #333;
   background: rgba(3, 3, 3, 0.5);
@@ -44,7 +44,6 @@ const StyledVideo = styled.video`
   width: 284px;
   height: auto;
   object-fit: cover;
-  border-radius: inherit;
 `;
 
 const DescriptionContainer = styled.div`
