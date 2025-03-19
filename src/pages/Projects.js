@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import CampridgeProject from "./CampridgeProject";
 import DoggleProject from "./DoggleProject";
+import PosProject from "./PosProject";
 import MainTitle from "./MainTitle";
 import MainIntro from "./MainIntro";
 
@@ -58,6 +59,7 @@ const Projects = ({ language }) => {
           >
             <ContentWrapper>
               <MainTitle language={language} />
+              <PosProject language={language} />
               <CampridgeProject language={language} />
               <DoggleProject language={language} />
             </ContentWrapper>
