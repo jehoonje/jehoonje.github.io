@@ -25,12 +25,13 @@ const LoadingScreen = () => {
           .l-shape {
             fill: none;
             stroke: black;
+            font-family: Arial, Helvetica, sans-serif; 
             stroke-width: 2;
           }
           .l-shape-highlight {
             fill: none;
             stroke: #000;
-            stroke-width: 6;
+            stroke-width: 5.5;
             stroke-dasharray: 200;
             stroke-dashoffset: 200;
             animation: draw 10s linear forwards;
@@ -51,7 +52,7 @@ const LoadingScreen = () => {
         `}
       </style>
       <motion.div
-        initial={{ x: 25, y: -80 }}
+        initial={{ x: 25, y: -40 }}
         animate={{ x: 2000 }}
         transition={{ delay: 4, duration: 3, ease: 'easeOut' }}
       >
@@ -89,7 +90,7 @@ const LoadingScreen = () => {
           >
             L
           </text>
-          <path className="l-shape-highlight" d="M 27.5 27 L 27 66.5 L 48 66.5" />
+          <path className="l-shape-highlight" d="M 27.5 27 L 27 68 L 52 68" />
         </motion.svg>
       </motion.div>
     </div>
